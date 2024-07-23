@@ -11,7 +11,7 @@ package com.linguagemII.aquaminas.modelo.entidade;
 public class Venda_Peixe {
     private Integer quantidade_Peixe;
     private Venda venda;
-    private peixe peixe;
+    private Peixe peixe;
 
     public Integer getQuantidade_Peixe() {
         return quantidade_Peixe;
@@ -29,11 +29,13 @@ public class Venda_Peixe {
         this.venda = venda;
     }
 
-    public peixe getPeixe() {
+    public Peixe getPeixe() {
         return peixe;
     }
 
-    public void setPeixe(peixe peixe) {
+    public void setPeixe(Peixe peixe) {
         this.peixe = peixe;
     }
+    
+    
 }
