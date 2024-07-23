@@ -9,10 +9,10 @@ package com.linguagemII.aquaminas.modelo.entidade;
  * @author 13306819670
  */
 public class Peixe {
-    private int idPeixe;
-    private int valor_Unid;
-    private int especie;
-    private char nome_cientifico;
+    private Integer idPeixe;
+    private Integer valor_Unid;
+    private Integer especie;
+    private String nome_cientifico;
 
     public int getIdPeixe() {
         return idPeixe;
@@ -38,11 +38,11 @@ public class Peixe {
         this.especie = especie;
     }
 
-    public char getNome_cientifico() {
+    public String getNome_cientifico() {
         return nome_cientifico;
     }
 
-    public void setNome_cientifico(char nome_cientifico) {
+    public void setNome_cientifico(String nome_cientifico) {
         this.nome_cientifico = nome_cientifico;
     }
     
