@@ -37,5 +37,4 @@ public class Venda_Peixe {
         this.peixe = peixe;
     }
     
-    
 }
