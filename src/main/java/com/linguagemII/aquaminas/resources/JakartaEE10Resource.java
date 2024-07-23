@@ -1,4 +1,4 @@
-package com.estruturadedados.aquaminas.resources;
+package com.linguagemII.aquaminas.resources;
 
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;

@@ -1,4 +1,4 @@
-package com.estruturadedados.aquaminas;
+package com.linguagemII.aquaminas;
 
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;
