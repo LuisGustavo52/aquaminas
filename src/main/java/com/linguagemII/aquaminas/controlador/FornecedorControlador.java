@@ -5,7 +5,7 @@
 package com.linguagemII.aquaminas.controlador;
 
 
-import com.linguagemII.aquaminas.modelo.dao.FornecedorDao;
+import com.linguagemII.aquaminas.modelo.dao.FornecedorDAO;
 import com.linguagemII.aquaminas.modelo.entidade.Fornecedor;
 import com.linguagemII.aquaminas.servico.WebConstantes;
 import jakarta.servlet.RequestDispatcher;

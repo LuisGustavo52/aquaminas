@@ -46,7 +46,7 @@ import java.util.List;
             Fornecedor Fornecedor = new Fornecedor();
             Fornecedor.setIdFornecedor(rs.getInt("idFornecedor"));
             Fornecedor.setNome(rs.getString("nome"));
-            Fornecedor.setCpf(rs.getInt("cpf"));
+            Fornecedor.setCpf(rs.getString("cpf"));
             Fornecedor.setTelefone(rs.getString("telefone"));
             
             return Fornecedor;

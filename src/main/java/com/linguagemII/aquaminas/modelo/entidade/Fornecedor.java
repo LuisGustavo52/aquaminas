@@ -11,7 +11,7 @@ package com.linguagemII.aquaminas.modelo.entidade;
 public class Fornecedor {
     private Integer idFornecedor;
     private String nome;
-    private Integer cpf;
+    private String cpf;
     private String telefone;
 
     public Integer getIdFornecedor() {
@@ -30,11 +30,11 @@ public class Fornecedor {
         this.nome = nome;
     }
 
-    public Integer getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(Integer cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
