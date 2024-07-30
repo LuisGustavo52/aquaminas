@@ -1,5 +1,5 @@
 <%-- 
-    Document   : CadastroCidade
+    Document   : CadastroPeixe
     Created on : 8 de jul. de 2024, 21:42:09
     Author     : tulio
 --%>
@@ -27,19 +27,19 @@
 
 
     <body>
-        <h1>Cadastro Cidade</h1>
+        <h1>Cadastro Peixe</h1>
         <table>
-            <form id="cadastroForm" name="cadastroForm" action="${pageContext.request.contextPath}${URL_BASE}/CidadeControlador" method="get">
+            <form id="cadastroForm" name="cadastroForm" action="${pageContext.request.contextPath}${URL_BASE}/PeixeControlador" method="get">
                 <input type="hidden" name="opcao" value="${opcao}" />
-                <input type="hidden" name="codigoCidade" value="${codigoCidade}" />
-                <p><label>Cidade:</label> <input type="text" name="nomeCidade" value="${nomeCidade}" size="40" /> </p>
-                <p><label>UF:</label> <input type="text" name="ufCidade" value="${ufCidade}" size="5" /> </p>
+                <input type="hidden" name="codigoPeixe" value="${idPeixe}" />
+                <p><label>Peixe:</label> <input type="text" name="nomePeixe" value="${nomePeixe}" size="40" /> </p>
+                <p><label>UF:</label> <input type="text" name="ufPeixe" value="${ufPeixe}" size="5" /> </p>
                 <td> 
                     <input type="submit" value="Salvar" name="Salvar"  /> 
                 </td>
             </form>
 
-            <form  name="cadastroForm" action="${pageContext.request.contextPath}${URL_BASE}/CidadeControlador" method="get">
+            <form  name="cadastroForm" action="${pageContext.request.contextPath}${URL_BASE}/PeixeControlador" method="get">
                 <td>
                     <input type="submit" value="Cancelar" name="Cancelar"  />
                 </td>
@@ -52,7 +52,7 @@
             <c:if test="${not empty cidades}">
                 <tr>
                     <th>Código</th>
-                    <th>Cidade</th>
+                    <th>Peixe</th>
                     <th>Uf</th>
                     <th>Alterar</th>
                     <th>Excluir</th>
@@ -61,23 +61,23 @@
 
             <c:forEach var="cidade" items="${cidades}">
                 <tr>
-                    <td>${cidade.codigoCidade}</td>
-                    <td>${cidade.nomeCidade}</td>
-                    <td>${cidade.ufCidade}</td>
+                    <td>${cidade.codigoPeixe}</td>
+                    <td>${cidade.nomePeixe}</td>
+                    <td>${cidade.ufPeixe}</td>
                     <td>
-                        <form name="cadastroForm" action="${pageContext.request.contextPath}${URL_BASE}/CidadeControlador" method="get">
-                            <input type="hidden" name="codigoCidade" value="${cidade.codigoCidade}" >
-                            <input type="hidden" name="nomeCidade" value="${cidade.nomeCidade}" >
-                            <input type="hidden" name="ufCidade" value="${cidade.ufCidade}" >
+                        <form name="cadastroForm" action="${pageContext.request.contextPath}${URL_BASE}/PeixeControlador" method="get">
+                            <input type="hidden" name="codigoPeixe" value="${cidade.codigoPeixe}" >
+                            <input type="hidden" name="nomePeixe" value="${cidade.nomePeixe}" >
+                            <input type="hidden" name="ufPeixe" value="${cidade.ufPeixe}" >
                             <input type="hidden" name="opcao" value="editar" >
                             <button type="submit">Editar</button>
                         </form>    
                     </td>
                     <td>
-                        <form name="cadastroForm" action="${pageContext.request.contextPath}${URL_BASE}/CidadeControlador" method="get">
-                            <input type="hidden" name="codigoCidade" value="${cidade.codigoCidade}" >
-                            <input type="hidden" name="nomeCidade" value="${cidade.nomeCidade}" >
-                            <input type="hidden" name="ufCidade" value="${cidade.ufCidade}" >
+                        <form name="cadastroForm" action="${pageContext.request.contextPath}${URL_BASE}/PeixeControlador" method="get">
+                            <input type="hidden" name="codigoPeixe" value="${cidade.codigoPeixe}" >
+                            <input type="hidden" name="nomePeixe" value="${cidade.nomePeixe}" >
+                            <input type="hidden" name="ufPeixe" value="${cidade.ufPeixe}" >
                             <input type="hidden" name="opcao" value="excluir" >
                             <button type="submit">Excluir</button>
                         </form>    
