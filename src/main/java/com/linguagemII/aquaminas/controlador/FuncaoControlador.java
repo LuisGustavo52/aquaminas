@@ -26,19 +26,23 @@ public class FuncaoControlador {
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 @WebServlet(WebConstantes.BASE_PATH + "/FuncaoControlador")
-public class PeixeControlador extends HttpServlet {
 
-    private FuncaoDao FuncaoDao;
-    private Funcao Funcao;
+
+public class FuncaoControlador extends HttpServlet {
+
+    private FuncaoDao funcaoDao;
+    private Funcao funcao;
     String idFuncao = "";
     String funcao = "";
     String opcao = "";
 
     @Override
     public void init() throws ServletException {
-        FuncaoDao = new FuncaoDao();
-        Funcao = new Funcao();
+        funcaoDao = new FuncaoDao();
+        funcao = new Funcao();
     }
+    
+    
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -70,9 +74,10 @@ public class PeixeControlador extends HttpServlet {
 
     private void cadastrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         validaCampos();
-        Funcao.setIdFuncao = Integer.parseInt(idFuncao);
+        Funcao.setIdFuncao (Integer.parseInt(idFuncao));
         Funcao.setFuncao(funcao);
         FuncaoDao.salvar(Funcao);
+        
         encaminharParaPagina(request, response);
     }
 
@@ -93,25 +98,22 @@ public class PeixeControlador extends HttpServlet {
 
     private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         validaCampos();
-        Funcao.setCodigoFuncao(Integer.valueOf(codigoFuncao));
-        Funcao.setNomeFuncao(nomeFuncao);
-        Funcao.setUfFuncao(ufFuncao);
+        Funcao.setIdFuncao(Integer.valueOf(idFuncao));
+        Funcao.setFuncao(Funcao);
         FuncaoDao.alterar(Funcao);
         cancelar(request, response);
     }
     private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Funcao.setCodigoFuncao(Integer.valueOf(codigoFuncao));
-        Funcao.setNomeFuncao(nomeFuncao);
-        Funcao.setUfFuncao(ufFuncao);
+        Funcao.setIdFuncao(Integer.valueOf(idFuncao));
+        Funcao.setFuncao(Funcao);
         FuncaoDao.excluir(Funcao);
         cancelar(request, response);
     }
 
     private void cancelar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("codigoFuncao", "0");
+        request.setAttribute("IdFuncao", "0");
         request.setAttribute("opcao", "cadastrar");
-        request.setAttribute("nomeFuncao", "");
-        request.setAttribute("ufFuncao", "");
+        request.setAttribute("Funcao", "");
         encaminharParaPagina(request, response);
     }
 
@@ -125,7 +127,7 @@ public class PeixeControlador extends HttpServlet {
     }
     
     public void validaCampos(){
-        if(nomeFuncao==null || nomeFuncao.isEmpty()|| ufFuncao==null || ufFuncao.isEmpty()){
+        if(Funcao==null || Funcao.isEmpty() ){
             throw new IllegalArgumentException("Um ou mais parâmetros estão ausentes");
         }
     }

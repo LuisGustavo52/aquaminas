@@ -16,13 +16,13 @@ import java.util.List;
 public class FuncaoDao {
     public class FuncaoDAO extends GenericoDAO<Funcao>{
     public void salvar(Funcao f){
-        String insert = "INSERT INTO Funcao(idFuncao,funcao) VALUES (?,?)";
-        save(insert, f.getIdFuncao(),f.getFuncao());
+        String insert = "INSERT INTO Funcao(funcao) VALUES (?)";
+        save(insert, f.getFuncao());
     }
     
     public void alterar(Funcao f){
-        String update = "UPDATE Funcao SET idFuncao = ?,funcao=? WHERE idFuncao=?";
-        save(update,  f.getIdFuncao(),f.getFuncao());
+        String update = "UPDATE Funcao SET funcao=? WHERE idFuncao=?";
+        save(update, f.getFuncao(), f.getIdFuncao());
     }
     
     public void excluir(Funcao f){

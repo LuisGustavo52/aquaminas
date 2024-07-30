@@ -10,7 +10,7 @@ package com.linguagemII.aquaminas.servico;
  */
 public  class WebConstantes {
     
- public static final String BASE_PATH = "/com/mycompany/estudocasosi/controlador";
+ public static final String BASE_PATH = "/com/linguagemII/aquaminas/controlador";
      
 
     

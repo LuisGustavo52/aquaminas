@@ -10,7 +10,7 @@ package com.linguagemII.aquaminas.modelo.entidade;
  */
 public class Cliente {
     private Integer idCliente;
-    private Integer nome;
+    private String nome;
     private Integer cpf;
     private String telefone;
 
@@ -22,11 +22,11 @@ public class Cliente {
         this.idCliente = idCliente;
     }
 
-    public Integer getNome() {
+    public String getNome() {
         return nome;
     }
 
-    public void setNome(Integer nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
