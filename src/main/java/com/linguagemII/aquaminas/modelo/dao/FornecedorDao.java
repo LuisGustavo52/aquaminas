@@ -4,7 +4,7 @@
  */
 package com.linguagemII.aquaminas.modelo.dao;
 
-import com.linguagemII.aquaminas.modelo.entidade.Peixe;
+import com.linguagemII.aquaminas.modelo.entidade.Fornecedor;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -14,44 +14,44 @@ import java.util.List;
  * @author 17933118623
  */
 public class FornecedorDao {
-    public class PeixeDAO extends GenericoDAO<Peixe>{
-    public void salvar(Peixe p){
-        String insert = "INSERT INTO Peixe(NOME,UF) VALUES (?,?)";
-        save(insert, p.getIdPeixe(),p.getValor_Unid(),p.getEspecie() ,p.getNome_cientifico());
+    public class FornecedorDAO extends GenericoDAO<Fornecedor>{
+    public void salvar(Fornecedor f){
+        String insert = "INSERT INTO Fornecedor(idFornecedor,nome,cpf,telefone) VALUES (?,?,?,?)";
+        save(insert, f.getIdFornecedor(),f.getNome(),f.getCpf() ,f.getTelefone());
     }
     
-    public void alterar(Peixe p){
-        String update = "UPDATE Peixe SET NOME = ?,UF=? WHERE CODIGO=?";
-        save(update, p.getIdPeixe(),p.getValor_Unid(),p.getEspecie() ,p.getNome_cientifico());
+    public void alterar(Fornecedor f){
+        String update = "UPDATE Fornecedor SET idFornecedor = ?,nome=? , cpf=?, telefone=? WHERE idFornecedor=?";
+        save(update,  f.getIdFornecedor(),f.getNome(),f.getCpf() ,f.getTelefone());
     }
     
-    public void excluir(Peixe p){
-        String delete = "DELETE FROM Peixe WHERE CODIGO = ?";
-        save(delete, p.getIdPeixe());
+    public void excluir(Fornecedor f){
+        String delete = "DELETE FROM Fornecedor WHERE idFornecedor = ?";
+        save(delete, f.getIdFornecedor());
     }
     
-    public Peixe buscarPorId(int id){
-        String select = "SELECT * FROM Peixe WHERE CODIGO=?";
-        return buscarPorId(select, new PeixeRowMapper(), id);
+    public Fornecedor buscarPorId(int id){
+        String select = "SELECT * FROM Fornecedor WHERE idFornecedor=?";
+        return buscarPorId(select, new FornecedorRowMapper(), id);
     }
     
-    public List<Peixe> buscarTodas(){
-        String select = "SELECT FROM Peixe";
-        return buscarTodos(select, new PeixeRowMapper());
+    public List<Fornecedor> buscarTodas(){
+        String select = "SELECT FROM Fornecedor";
+        return buscarTodos(select, new FornecedorRowMapper());
     }
     
 }
-    public static class PeixeRowMapper implements RowMapper<Peixe>{
+    public static class FornecedorRowMapper implements RowMapper<Fornecedor>{
         
         @Override
-        public Peixe mapRow(ResultSet rs) throws SQLException{
-            Peixe Peixe = new Peixe();
-            Peixe.setIdPeixe(rs.getInt("CODIGO"));
-            Peixe.setNome_cientifico(rs.getString("NOME"));
-            Peixe.setValor_Unid(rs.getInt("Valor"));
-            Peixe.setNome_cientifico(rs.getString("NOME"));
+        public Fornecedor mapRow(ResultSet rs) throws SQLException{
+            Fornecedor Fornecedor = new Fornecedor();
+            Fornecedor.setIdFornecedor(rs.getInt("idFornecedor"));
+            Fornecedor.setNome(rs.getString("nome"));
+            Fornecedor.setCpf(rs.getInt("cpf"));
+            Fornecedor.setTelefone(rs.getString("telefone"));
             
-            return Peixe;
+            return Fornecedor;
         }
         
     }
