@@ -10,7 +10,7 @@ package com.linguagemII.aquaminas.modelo.entidade;
  */
 public class Funcao {
     private Integer idFuncao;
-    private Integer funcao;
+    private String funcao;
 
     public int getIdFuncao() {
         return idFuncao;
@@ -20,11 +20,11 @@ public class Funcao {
         this.idFuncao = idFuncao;
     }
 
-    public int getFuncao() {
+    public String getFuncao() {
         return funcao;
     }
 
-    public void setFuncao(int funcao) {
+    public void setFuncao(String funcao) {
         this.funcao = funcao;
     }
     
