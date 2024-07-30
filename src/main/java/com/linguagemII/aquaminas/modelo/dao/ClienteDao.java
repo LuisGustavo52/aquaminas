@@ -47,14 +47,14 @@ import java.util.List;
             Cliente Cliente = new Cliente();
             Cliente.setIdCliente(rs.getInt("idCliente"));
             Cliente.setNome(rs.getString("nome"));
-            Cliente.setCpf(rs.getInt("cpf"));
+            Cliente.setCpf(rs.getString("cpf"));
             Cliente.setTelefone(rs.getString("telefone"));
             
             return Cliente;
         }
         
     }
-    }
+}
     
 
 

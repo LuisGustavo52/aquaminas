@@ -4,7 +4,7 @@
  */
 package com.linguagemII.aquaminas.controlador;
 
-import com.linguagemII.aquaminas.modelo.dao.FuncaoDao;
+import com.linguagemII.aquaminas.modelo.dao.FuncaoDAO;
 import com.linguagemII.aquaminas.modelo.entidade.Funcao;
 import com.linguagemII.aquaminas.servico.WebConstantes;
 import jakarta.servlet.RequestDispatcher;
@@ -30,7 +30,7 @@ import java.util.List;
 
 public class FuncaoControlador extends HttpServlet {
 
-    private FuncaoDao FuncaoDao;
+    private FuncaoDAO FuncaoDao;
     private Funcao Funcao;
     String idFuncao = "";
     String funcao = "";
@@ -38,10 +38,9 @@ public class FuncaoControlador extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        FuncaoDao = new FuncaoDao();
+        FuncaoDao = new FuncaoDAO();
         Funcao = new Funcao();
     }
-    
     
 
     @Override
@@ -99,13 +98,13 @@ public class FuncaoControlador extends HttpServlet {
     private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         validaCampos();
         Funcao.setIdFuncao(Integer.valueOf(idFuncao));
-        Funcao.setFuncao(Funcao);
+        Funcao.setFuncao(funcao);
         FuncaoDao.alterar(Funcao);
         cancelar(request, response);
     }
     private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Funcao.setIdFuncao(Integer.valueOf(idFuncao));
-        Funcao.setFuncao(Funcao);
+        Funcao.setFuncao(funcao);
         FuncaoDao.excluir(Funcao);
         cancelar(request, response);
     }
@@ -127,11 +126,10 @@ public class FuncaoControlador extends HttpServlet {
     }
     
     public void validaCampos(){
-        if(Funcao==null || Funcao.isEmpty() ){
+        if(Funcao==null || funcao.isEmpty() ){
             throw new IllegalArgumentException("Um ou mais parâmetros estão ausentes");
         }
     }
 
 }
 
-}
