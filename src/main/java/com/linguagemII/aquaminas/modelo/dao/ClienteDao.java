@@ -4,10 +4,57 @@
  */
 package com.linguagemII.aquaminas.modelo.dao;
 
+import com.linguagemII.aquaminas.modelo.entidade.Cliente;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
 /**
  *
  * @author 17933118623
  */
 public class ClienteDao {
+    public class ClienteDAO extends GenericoDAO<Cliente>{
+    public void salvar(Cliente c){
+        String insert = "INSERT INTO Cliente(idCliente,nome,cpf,telefone) VALUES (?,?,?,?)";
+        save(insert, c.getIdCliente(),c.getNome(),c.getCpf() ,c.getTelefone());
+    }
+    
+    public void alterar(Cliente c){
+        String update = "UPDATE Cliente SET idCliente = ?,nome=? ,cpf = ?, telefone = ? WHERE CODIGO=?";
+        save(update,  c.getIdCliente(),c.getNome(),c.getCpf() ,c.getTelefone());
+    }
+    
+    public void excluir(Cliente c){
+        String delete = "DELETE FROM Cliente WHERE idCliente = ?";
+        save(delete, c.getIdCliente());
+    }
+    
+    public Cliente buscarPorId(int id){
+        String select = "SELECT * FROM Cliente WHERE idCliente=?";
+        return buscarPorId(select, new ClienteRowMapper(), id);
+    }
+    
+    public List<Cliente> buscarTodas(){
+        String select = "SELECT FROM Cliente";
+        return buscarTodos(select, new ClienteRowMapper());
+    }
     
 }
+    public static class ClienteRowMapper implements RowMapper<Cliente>{
+        
+        @Override
+        public Cliente mapRow(ResultSet rs) throws SQLException{
+            Cliente Cliente = new Cliente();
+            Cliente.setIdCliente(rs.getInt("idCliente"));
+            Cliente.setNome(rs.getString("nome"));
+            Cliente.setCpf(rs.getInt("cpf"));
+            Cliente.setTelefone(rs.getString("telefone"));
+            
+            return Cliente;
+        }
+        
+    }
+    
+}
+

@@ -21,22 +21,22 @@ public class PeixeDao {
  */
 public class PeixeDAO extends GenericoDAO<Peixe>{
     public void salvar(Peixe p){
-        String insert = "INSERT INTO Peixe(NOME,UF) VALUES (?,?)";
+        String insert = "INSERT INTO Peixe(nome_cientifico, valor_Unid, especie) VALUES (?,?,?)";
         save(insert, p.getIdPeixe(),p.getValor_Unid(),p.getEspecie() ,p.getNome_cientifico());
     }
     
     public void alterar(Peixe p){
-        String update = "UPDATE Peixe SET NOME = ?,UF=? WHERE CODIGO=?";
+        String update = "UPDATE Peixe SET nome = ?, valor_Unid = ? ,especie = ? WHERE idPeixe = ?";
         save(update, p.getIdPeixe(),p.getValor_Unid(),p.getEspecie() ,p.getNome_cientifico());
     }
     
     public void excluir(Peixe p){
-        String delete = "DELETE FROM Peixe WHERE CODIGO = ?";
+        String delete = "DELETE FROM Peixe WHERE idPeixe = ?";
         save(delete, p.getIdPeixe());
     }
     
     public Peixe buscarPorId(int id){
-        String select = "SELECT * FROM Peixe WHERE CODIGO=?";
+        String select = "SELECT * FROM Peixe WHERE idPeixe = ?";
         return buscarPorId(select, new PeixeRowMapper(), id);
     }
     
@@ -51,10 +51,10 @@ public class PeixeDAO extends GenericoDAO<Peixe>{
         @Override
         public Peixe mapRow(ResultSet rs) throws SQLException{
             Peixe Peixe = new Peixe();
-            Peixe.setIdPeixe(rs.getInt("CODIGO"));
-            Peixe.setNome_cientifico(rs.getString("NOME"));
-            Peixe.setValor_Unid(rs.getInt("Valor"));
-            Peixe.setNome_cientifico(rs.getString("NOME"));
+            Peixe.setIdPeixe(rs.getInt("idPeixe"));
+            Peixe.setNome_cientifico(rs.getString("nome_cientifico"));
+            Peixe.setValor_Unid(rs.getInt("valor_Unid"));
+            Peixe.setEspecie(rs.getString("especie"));
             
             return Peixe;
         }
