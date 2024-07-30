@@ -4,9 +4,10 @@
  */
 package com.linguagemII.aquaminas.controlador;
 
-import com.mycompany.estudocasosi.modelo.dao.CidadeDao;
-import com.mycompany.estudocasosi.modelo.entidade.Cidade;
-import com.mycompany.estudocasosi.servico.WebConstantes;
+
+import com.linguagemII.aquaminas.modelo.dao.PeixeDao;
+import com.linguagemII.aquaminas.modelo.entidade.Peixe;
+import com.linguagemII.aquaminas.servico.WebConstantes;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -20,29 +21,30 @@ import java.util.List;
  *
  * @author tulio
  */
-@WebServlet(WebConstantes.BASE_PATH + "/CidadeControlador")
+@WebServlet(WebConstantes.BASE_PATH + "/PeixeControlador")
 public class PeixeControlador extends HttpServlet {
 
-    private CidadeDao cidadeDao;
-    private Cidade cidade;
-    String codigoCidade = "";
-    String nomeCidade = "";
-    String ufCidade = "";
+    private PeixeDao peixeDao;
+    private Peixe peixe;
+    String idPeixe = "";
+    String especie = "";
+    String valor_Unid = "";
+    String nome_cientifico = "";
     String opcao = "";
 
     @Override
     public void init() throws ServletException {
-        cidadeDao = new CidadeDao();
-        cidade = new Cidade();
+        peixeDao = new PeixeDao();
+        peixe = new Peixe();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             opcao = request.getParameter("opcao");
-            codigoCidade = request.getParameter("codigoCidade");
-            nomeCidade = request.getParameter("nomeCidade");
-            ufCidade = request.getParameter("ufCidade");
+            idPeixe = request.getParameter("idPeixe");
+            nomePeixe = request.getParameter("nomePeixe");
+            ufPeixe = request.getParameter("ufPeixe");
             if (opcao == null || opcao.isEmpty()) {
                 opcao = "cadastrar";
             }
@@ -67,64 +69,64 @@ public class PeixeControlador extends HttpServlet {
 
     private void cadastrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         validaCampos();
-        cidade.setNomeCidade(nomeCidade);
-        cidade.setUfCidade(ufCidade);
-        cidadeDao.salvar(cidade);
+        peixe.setNomePeixe(nomePeixe);
+        peixe.setUfPeixe(ufPeixe);
+        peixeDao.salvar(peixe);
         encaminharParaPagina(request, response);
     }
 
     private void editar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("codigoCidade", codigoCidade);
+        request.setAttribute("idPeixe", idPeixe);
         request.setAttribute("opcao", "confirmarEditar");
-        request.setAttribute("nomeCidade", nomeCidade);
-        request.setAttribute("ufCidade", ufCidade);
+        request.setAttribute("nomePeixe", nomePeixe);
+        request.setAttribute("ufPeixe", ufPeixe);
         request.setAttribute("mensagem", "Edite os dados e clique em salvar");
         encaminharParaPagina(request, response);
     }
     private void excluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("codigoCidade", codigoCidade);
+        request.setAttribute("idPeixe", idPeixe);
         request.setAttribute("opcao", "confirmarExcluir");
-        request.setAttribute("nomeCidade", nomeCidade);
-        request.setAttribute("ufCidade", ufCidade);
+        request.setAttribute("nomePeixe", nomePeixe);
+        request.setAttribute("ufPeixe", ufPeixe);
         request.setAttribute("mensagem", "Clique em salvar para confirmar a exclusão dos dados");
         encaminharParaPagina(request, response);
     }
 
     private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         validaCampos();
-        cidade.setCodigoCidade(Integer.valueOf(codigoCidade));
-        cidade.setNomeCidade(nomeCidade);
-        cidade.setUfCidade(ufCidade);
-        cidadeDao.alterar(cidade);
+        peixe.setCodigoPeixe(Integer.valueOf(idPeixe));
+        peixe.setNomePeixe(nomePeixe);
+        peixe.setUfPeixe(ufPeixe);
+        peixeDao.alterar(peixe);
         cancelar(request, response);
     }
     private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        cidade.setCodigoCidade(Integer.valueOf(codigoCidade));
-        cidade.setNomeCidade(nomeCidade);
-        cidade.setUfCidade(ufCidade);
-        cidadeDao.excluir(cidade);
+        peixe.setCodigoPeixe(Integer.valueOf(idPeixe));
+        peixe.setNomePeixe(nomePeixe);
+        peixe.setUfPeixe(ufPeixe);
+        peixeDao.excluir(peixe);
         cancelar(request, response);
     }
 
     private void cancelar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("codigoCidade", "0");
+        request.setAttribute("idPeixe", "0");
         request.setAttribute("opcao", "cadastrar");
-        request.setAttribute("nomeCidade", "");
-        request.setAttribute("ufCidade", "");
+        request.setAttribute("nomePeixe", "");
+        request.setAttribute("ufPeixe", "");
         encaminharParaPagina(request, response);
     }
 
     private void encaminharParaPagina(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Cidade> cidades = cidadeDao.buscarTodas();
-        request.setAttribute("cidades", cidades);
+        List<Peixe> peixes = peixeDao.buscarTodas();
+        request.setAttribute("peixes", peixes);
         request.setAttribute(opcao, opcao);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/CadastroCidade.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/CadastroPeixe.jsp");
         dispatcher.forward(request, response);
 
     }
     
     public void validaCampos(){
-        if(nomeCidade==null || nomeCidade.isEmpty()|| ufCidade==null || ufCidade.isEmpty()){
+        if(nomePeixe==null || nomePeixe.isEmpty()|| ufPeixe==null || ufPeixe.isEmpty()){
             throw new IllegalArgumentException("Um ou mais parâmetros estão ausentes");
         }
     }

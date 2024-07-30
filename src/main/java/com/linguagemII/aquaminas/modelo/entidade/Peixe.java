@@ -10,7 +10,7 @@ package com.linguagemII.aquaminas.modelo.entidade;
  */
 public class Peixe {
     private Integer idPeixe;
-    private Integer valor_Unid;
+    private Double valor_unidade;
     private String especie;
     private String nome_cientifico;
 
@@ -22,12 +22,12 @@ public class Peixe {
         this.idPeixe = idPeixe;
     }
 
-    public int getValor_Unid() {
-        return valor_Unid;
+    public Double getValor_Unid() {
+        return valor_unidade;
     }
 
-    public void setValor_Unid(int valor_Unid) {
-        this.valor_Unid = valor_Unid;
+    public void setValor_Unid(Double valor_Unid) {
+        this.valor_unidade = valor_Unid;
     }
 
     public String getEspecie() {
