@@ -43,8 +43,9 @@ public class PeixeControlador extends HttpServlet {
         try {
             opcao = request.getParameter("opcao");
             idPeixe = request.getParameter("idPeixe");
-            nomePeixe = request.getParameter("nomePeixe");
-            ufPeixe = request.getParameter("ufPeixe");
+            especie = request.getParameter("especie");
+            nome_cientifico = request.getParameter("nome_cientifico");
+            valor_Unid = request.getParameter("valor_unidade");
             if (opcao == null || opcao.isEmpty()) {
                 opcao = "cadastrar";
             }
@@ -69,8 +70,8 @@ public class PeixeControlador extends HttpServlet {
 
     private void cadastrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         validaCampos();
-        peixe.setNomePeixe(nomePeixe);
-        peixe.setUfPeixe(ufPeixe);
+        peixe.setNomePeixe(especie);
+        peixe.setUfPeixe(nome_cientifico);
         peixeDao.salvar(peixe);
         encaminharParaPagina(request, response);
     }
@@ -78,16 +79,16 @@ public class PeixeControlador extends HttpServlet {
     private void editar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("idPeixe", idPeixe);
         request.setAttribute("opcao", "confirmarEditar");
-        request.setAttribute("nomePeixe", nomePeixe);
-        request.setAttribute("ufPeixe", ufPeixe);
+        request.setAttribute("especie", especie);
+        request.setAttribute("nome_cientifico", nome_cientifico);
         request.setAttribute("mensagem", "Edite os dados e clique em salvar");
         encaminharParaPagina(request, response);
     }
     private void excluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("idPeixe", idPeixe);
         request.setAttribute("opcao", "confirmarExcluir");
-        request.setAttribute("nomePeixe", nomePeixe);
-        request.setAttribute("ufPeixe", ufPeixe);
+        request.setAttribute("especie", especie);
+        request.setAttribute("nome_cientifico", nome_cientifico);
         request.setAttribute("mensagem", "Clique em salvar para confirmar a exclusão dos dados");
         encaminharParaPagina(request, response);
     }
@@ -95,15 +96,15 @@ public class PeixeControlador extends HttpServlet {
     private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         validaCampos();
         peixe.setCodigoPeixe(Integer.valueOf(idPeixe));
-        peixe.setNomePeixe(nomePeixe);
-        peixe.setUfPeixe(ufPeixe);
+        peixe.setNomePeixe(especie);
+        peixe.setUfPeixe(nome_cientifico);
         peixeDao.alterar(peixe);
         cancelar(request, response);
     }
     private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         peixe.setCodigoPeixe(Integer.valueOf(idPeixe));
-        peixe.setNomePeixe(nomePeixe);
-        peixe.setUfPeixe(ufPeixe);
+        peixe.setNomePeixe(especie);
+        peixe.setUfPeixe(nome_cientifico);
         peixeDao.excluir(peixe);
         cancelar(request, response);
     }
@@ -111,8 +112,8 @@ public class PeixeControlador extends HttpServlet {
     private void cancelar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("idPeixe", "0");
         request.setAttribute("opcao", "cadastrar");
-        request.setAttribute("nomePeixe", "");
-        request.setAttribute("ufPeixe", "");
+        request.setAttribute("especie", "");
+        request.setAttribute("nome_cientifico", "");
         encaminharParaPagina(request, response);
     }
 
@@ -126,7 +127,7 @@ public class PeixeControlador extends HttpServlet {
     }
     
     public void validaCampos(){
-        if(nomePeixe==null || nomePeixe.isEmpty()|| ufPeixe==null || ufPeixe.isEmpty()){
+        if(especie==null || especie.isEmpty()|| nome_cientifico==null || nome_cientifico.isEmpty()){
             throw new IllegalArgumentException("Um ou mais parâmetros estão ausentes");
         }
     }
