@@ -44,7 +44,7 @@ public class GenericoDAO<T> {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
+        } finally { //Executa independente das exceções
             try {
                 if (pstmt != null) pstmt.close();
                 if (con != null) con.close();
