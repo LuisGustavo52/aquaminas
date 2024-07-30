@@ -5,8 +5,8 @@
 package com.linguagemII.aquaminas.controlador;
 
 
-import com.linguagemII.aquaminas.modelo.dao.PeixeDao;
-import com.linguagemII.aquaminas.modelo.entidade.Peixe;
+import com.linguagemII.aquaminas.modelo.dao.FornecedorDao;
+import com.linguagemII.aquaminas.modelo.entidade.Fornecedor;
 import com.linguagemII.aquaminas.servico.WebConstantes;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -21,31 +21,31 @@ import java.util.List;
  *
  * @author tulio
  */
-@WebServlet(WebConstantes.BASE_PATH + "/PeixeControlador")
-public class PeixeControlador extends HttpServlet {
+@WebServlet(WebConstantes.BASE_PATH + "/FornecedorControlador")
+public class FornecedorControlador extends HttpServlet {
 
-    private PeixeDAO peixeDao;
-    private Peixe peixe;
-    String idPeixe = "";
-    String especie = "";
-    String valor_Unid = "";
-    String nome_cientifico = "";
+    private FornecedorDAO fornecedorDao;
+    private Fornecedor fornecedor;
+    String idFornecedor = "";
+    String nome = "";
+    String telefone = "";
+    String cpf = "";
     String opcao = "";
 
     @Override
     public void init() throws ServletException {
-        peixeDao = new PeixeDAO();
-        peixe = new Peixe();
+        fornecedorDao = new FornecedorDAO();
+        fornecedor = new Fornecedor();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             opcao = request.getParameter("opcao");
-            idPeixe = request.getParameter("idPeixe");
-            especie = request.getParameter("especie");
-            nome_cientifico = request.getParameter("nome_cientifico");
-            valor_Unid = request.getParameter("valor_unidade");
+            idFornecedor = request.getParameter("idFornecedor");
+            nome = request.getParameter("nome");
+            cpf = request.getParameter("cpf");
+            telefone = request.getParameter("valor_unidade");
             if (opcao == null || opcao.isEmpty()) {
                 opcao = "cadastrar";
             }
@@ -70,69 +70,69 @@ public class PeixeControlador extends HttpServlet {
 
     private void cadastrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         validaCampos();
-        peixe.setEspecie(especie);
-        peixe.setNome_cientifico(nome_cientifico);
-        peixe.setValor_Unid(Double.valueOf(valor_Unid));
-        peixeDao.salvar(peixe);
+        fornecedor.setNome(nome);
+        fornecedor.setCpf(cpf);
+        fornecedor.setTelefone(telefone);
+        fornecedorDao.salvar(fornecedor);
         encaminharParaPagina(request, response);
     }
 
     private void editar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("idPeixe", idPeixe);
+        request.setAttribute("idFornecedor", idFornecedor);
         request.setAttribute("opcao", "confirmarEditar");
-        request.setAttribute("especie", especie);
-        request.setAttribute("nome_cientifico", nome_cientifico);
-        request.setAttribute("valor_unidade", valor_Unid);
+        request.setAttribute("nome", nome);
+        request.setAttribute("cpf", cpf);
+        request.setAttribute("valor_unidade", telefone);
         request.setAttribute("mensagem", "Edite os dados e clique em salvar");
         encaminharParaPagina(request, response);
     }
     private void excluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("idPeixe", idPeixe);
+        request.setAttribute("idFornecedor", idFornecedor);
         request.setAttribute("opcao", "confirmarExcluir");
-        request.setAttribute("especie", especie);
-        request.setAttribute("nome_cientifico", nome_cientifico);
-        request.setAttribute("valor_unidade", valor_Unid);
+        request.setAttribute("nome", nome);
+        request.setAttribute("cpf", cpf);
+        request.setAttribute("valor_unidade", telefone);
         request.setAttribute("mensagem", "Clique em salvar para confirmar a exclusão dos dados");
         encaminharParaPagina(request, response);
     }
 
     private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         validaCampos();
-        peixe.setIdPeixe(Integer.parseInt(idPeixe));
-        peixe.setEspecie(especie);
-        peixe.setNome_cientifico(nome_cientifico);
-        peixe.setValor_Unid(Double.valueOf(valor_Unid));
-        peixeDao.alterar(peixe);
+        fornecedor.setIdFornecedor(Integer.parseInt(idFornecedor));
+        fornecedor.setNome(nome);
+        fornecedor.setCpf(cpf);
+        fornecedor.setTelefone(telefone);
+        fornecedorDao.alterar(fornecedor);
         cancelar(request, response);
     }
     private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        peixe.setIdPeixe(Integer.parseInt(idPeixe));
-        peixe.setEspecie(especie);
-        peixe.setNome_cientifico(nome_cientifico);
-        peixe.setValor_Unid(Double.valueOf(valor_Unid));
-        peixeDao.excluir(peixe);
+        fornecedor.setIdFornecedor(Integer.parseInt(idFornecedor));
+        fornecedor.setNome(nome);
+        fornecedor.setCpf(cpf);
+        fornecedor.setTelefone(telefone);
+        fornecedorDao.excluir(fornecedor);
         cancelar(request, response);
     }
 
     private void cancelar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("idPeixe", "0");
+        request.setAttribute("idFornecedor", "0");
         request.setAttribute("opcao", "cadastrar");
-        request.setAttribute("especie", "");
-        request.setAttribute("nome_cientifico", "");
+        request.setAttribute("nome", "");
+        request.setAttribute("cpf", "");
         encaminharParaPagina(request, response);
     }
 
     private void encaminharParaPagina(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Peixe> peixes = peixeDao.buscarTodas();
-        request.setAttribute("peixes", peixes);
+        List<Fornecedor> fornecedors = fornecedorDao.buscarTodas();
+        request.setAttribute("fornecedors", fornecedors);
         request.setAttribute(opcao, opcao);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/CadastroPeixe.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/CadastroFornecedor.jsp");
         dispatcher.forward(request, response);
 
     }
     
     public void validaCampos(){
-        if(especie==null || especie.isEmpty()|| nome_cientifico==null || nome_cientifico.isEmpty() || valor_Unid==null || valor_Unid.isEmpty()){
+        if(nome==null || nome.isEmpty()|| cpf==null || cpf.isEmpty() || telefone==null || telefone.isEmpty()){
             throw new IllegalArgumentException("Um ou mais parâmetros estão ausentes");
         }
     }
