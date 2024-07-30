@@ -5,7 +5,7 @@
 package com.linguagemII.aquaminas.controlador;
 
 
-import com.linguagemII.aquaminas.modelo.dao.PeixeDao;
+import com.linguagemII.aquaminas.modelo.dao.PeixeDAO;
 import com.linguagemII.aquaminas.modelo.entidade.Peixe;
 import com.linguagemII.aquaminas.servico.WebConstantes;
 import jakarta.servlet.RequestDispatcher;
@@ -19,7 +19,7 @@ import java.util.List;
 
 /**
  *
- * @author tulio
+ *
  */
 @WebServlet(WebConstantes.BASE_PATH + "/PeixeControlador")
 public class PeixeControlador extends HttpServlet {
@@ -34,7 +34,7 @@ public class PeixeControlador extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        peixeDao = new PeixeDao();
+        peixeDao = new PeixeDAO();
         peixe = new Peixe();
     }
 
