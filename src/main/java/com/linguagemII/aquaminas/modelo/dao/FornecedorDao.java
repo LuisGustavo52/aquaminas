@@ -13,7 +13,6 @@ import java.util.List;
  *
  * @author 17933118623
  */
-public class FornecedorDao {
     public class FornecedorDAO extends GenericoDAO<Fornecedor>{
     public void salvar(Fornecedor f){
         String insert = "INSERT INTO Fornecedor(idFornecedor,nome,cpf,telefone) VALUES (?,?,?,?)";
@@ -39,8 +38,7 @@ public class FornecedorDao {
         String select = "SELECT FROM Fornecedor";
         return buscarTodos(select, new FornecedorRowMapper());
     }
-    
-}
+
     public static class FornecedorRowMapper implements RowMapper<Fornecedor>{
         
         @Override
@@ -55,6 +53,6 @@ public class FornecedorDao {
         }
         
     }
-    
-}
+    }
+
 

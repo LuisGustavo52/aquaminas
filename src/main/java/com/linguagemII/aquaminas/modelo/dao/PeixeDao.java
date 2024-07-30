@@ -13,7 +13,6 @@ import java.util.List;
  *
  * @author 17933118623
  */
-public class PeixeDao {
     
 /**
  *
@@ -45,7 +44,7 @@ public class PeixeDAO extends GenericoDAO<Peixe>{
         return buscarTodos(select, new PeixeRowMapper());
     }
     
-}
+
     public static class PeixeRowMapper implements RowMapper<Peixe>{
         
         @Override
@@ -53,13 +52,14 @@ public class PeixeDAO extends GenericoDAO<Peixe>{
             Peixe Peixe = new Peixe();
             Peixe.setIdPeixe(rs.getInt("idPeixe"));
             Peixe.setNome_cientifico(rs.getString("nome_cientifico"));
-            Peixe.setValor_Unid(rs.getInt("valor_Unid"));
+            Peixe.setValor_Unid(rs.getDouble("valor_Unid"));
             Peixe.setEspecie(rs.getString("especie"));
             
             return Peixe;
         }
         
     }
-    
 }
+    
+
 

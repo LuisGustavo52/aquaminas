@@ -13,7 +13,6 @@ import java.util.List;
  *
  * @author 17933118623
  */
-public class ClienteDao {
     public class ClienteDAO extends GenericoDAO<Cliente>{
     public void salvar(Cliente c){
         String insert = "INSERT INTO Cliente(idCliente,nome,cpf,telefone) VALUES (?,?,?,?)";
@@ -40,7 +39,7 @@ public class ClienteDao {
         return buscarTodos(select, new ClienteRowMapper());
     }
     
-}
+
     public static class ClienteRowMapper implements RowMapper<Cliente>{
         
         @Override
@@ -55,6 +54,7 @@ public class ClienteDao {
         }
         
     }
+    }
     
-}
+
 

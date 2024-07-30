@@ -13,7 +13,6 @@ import java.util.List;
  *
  * @author 17933118623
  */
-public class FuncaoDao {
     public class FuncaoDAO extends GenericoDAO<Funcao>{
     public void salvar(Funcao f){
         String insert = "INSERT INTO Funcao(funcao) VALUES (?)";
@@ -39,8 +38,6 @@ public class FuncaoDao {
         String select = "SELECT FROM Funcao";
         return buscarTodos(select, new FuncaoRowMapper());
     }
-    
-}
     public static class FuncaoRowMapper implements RowMapper<Funcao>{
         
         @Override
@@ -53,6 +50,6 @@ public class FuncaoDao {
         }
         
     }
-    
-}
+    }
+
 
