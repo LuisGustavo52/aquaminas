@@ -10,8 +10,10 @@
         <nav>
             <ul>
                 <li><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
-                <li><a href="${pageContext.request.contextPath}${URL_BASE}/CidadeControlador?opcao=cancelar">Cidade</a></li>
-                <li><a href="${pageContext.request.contextPath}${URL_BASE}/FuncionarioControlador?opcao=cancelar">Funcionário</a></li>
+                <li><a href="${pageContext.request.contextPath}${URL_BASE}/PeixeControlador?opcao=cancelar">Peixe</a></li>
+                <li><a href="${pageContext.request.contextPath}${URL_BASE}/FornecedorControlador?opcao=cancelar">Fornecedor</a></li>
+                <li><a href="${pageContext.request.contextPath}${URL_BASE}/ClienteControlador?opcao=cancelar">Cliente</a></li>
+                <li><a href="${pageContext.request.contextPath}${URL_BASE}/FuncaoControlador?opcao=cancelar">Função</a></li>
                 <li><a href="${pageContext.request.contextPath}/login.jsp">Login</a></li>
                 <li><a href="${pageContext.request.contextPath}${URL_BASE}/LogoutControlador">Logout</a></li>
                 

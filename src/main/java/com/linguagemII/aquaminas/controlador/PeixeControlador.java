@@ -30,12 +30,13 @@ public class PeixeControlador extends HttpServlet {
     String especie = "";
     String valor_Unid = "";
     String nome_cientifico = "";
-    String opcao = "";
+    String opcao = null;
 
     @Override
     public void init() throws ServletException {
         peixeDao = new PeixeDAO();
         peixe = new Peixe();
+        //encaminharParaPagina(request, response);
     }
 
     @Override
@@ -46,7 +47,11 @@ public class PeixeControlador extends HttpServlet {
             especie = request.getParameter("especie");
             nome_cientifico = request.getParameter("nome_cientifico");
             valor_Unid = request.getParameter("valor_unidade");
-            if (opcao == null || opcao.isEmpty()) {
+            if (opcao == null) {
+                encaminharParaPagina(request, response);
+                return;
+            }
+             if (opcao.isEmpty()) {
                 opcao = "cadastrar";
             }
             switch (opcao) {

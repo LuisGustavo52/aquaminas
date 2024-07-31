@@ -22,12 +22,12 @@ import java.util.List;
 public class PeixeDAO extends GenericoDAO<Peixe>{
     public void salvar(Peixe p){
         String insert = "INSERT INTO Peixe(nome_cientifico, valor_Unid, especie) VALUES (?,?,?)";
-        save(insert, p.getIdPeixe(),p.getValor_Unid(),p.getEspecie() ,p.getNome_cientifico());
+        save(insert, p.getNome_cientifico(),p.getValor_Unid(),p.getEspecie());
     }
     
     public void alterar(Peixe p){
-        String update = "UPDATE Peixe SET nome = ?, valor_Unid = ? ,especie = ? WHERE idPeixe = ?";
-        save(update, p.getIdPeixe(),p.getValor_Unid(),p.getEspecie() ,p.getNome_cientifico());
+        String update = "UPDATE Peixe SET especie = ?, valor_Unid = ? ,nome_cientifico = ? WHERE idPeixe = ?";
+        save(update, p.getEspecie(),p.getValor_Unid() ,p.getNome_cientifico(), p.getIdPeixe());
     }
     
     public void excluir(Peixe p){
@@ -41,7 +41,7 @@ public class PeixeDAO extends GenericoDAO<Peixe>{
     }
     
     public List<Peixe> buscarTodas(){
-        String select = "SELECT FROM Peixe";
+        String select = "SELECT * FROM Peixe";
         return buscarTodos(select, new PeixeRowMapper());
     }
     

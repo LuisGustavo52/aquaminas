@@ -32,9 +32,10 @@
         <table>
             <form id="cadastroForm" name="cadastroForm" action="${pageContext.request.contextPath}${URL_BASE}/PeixeControlador" method="get">
                 <input type="hidden" name="opcao" value="${opcao}" />
-                <input type="hidden" name="codigoPeixe" value="${idPeixe}" />
-                <p><label>Peixe:</label> <input type="text" name="nomePeixe" value="${nomePeixe}" size="40" /> </p>
-                <p><label>UF:</label> <input type="text" name="ufPeixe" value="${ufPeixe}" size="5" /> </p>
+                <input type="hidden" name="idPeixe" value="${idPeixe}" />
+                <p><label>Especie</label> <input type="text" name="especie" value="${especie}" size="40" /> </p>
+                <p><label>Nome Científico:</label> <input type="text" name="nome_cientifico" value="${nome_cientifico}" size="50" /> </p>
+                <p><label>Valor Unitário:</label> <input type="number" name="valor_unidade" value="${valor_unidade}" size="10" /> </p>
                 <td> 
                     <input type="submit" value="Salvar" name="Salvar"  /> 
                 </td>
@@ -50,35 +51,39 @@
         ${mensagem}
 
         <table border="1">
-            <c:if test="${not empty cidades}">
+            <c:if test="${not empty peixes}">
                 <tr>
-                    <th>Código</th>
-                    <th>Peixe</th>
-                    <th>Uf</th>
-                    <th>Alterar</th>
+                    <th>IDs</th>
+                    <th>Espécie</th>
+                    <th>Nome Científico</th>
+                    <th>Valor Unitário</th>
+                    <th>Valor </th>
                     <th>Excluir</th>
                 </tr> 
             </c:if>
 
-            <c:forEach var="cidade" items="${cidades}">
+            <c:forEach var="peixe" items="${peixes}">
                 <tr>
-                    <td>${cidade.codigoPeixe}</td>
-                    <td>${cidade.nomePeixe}</td>
-                    <td>${cidade.ufPeixe}</td>
+                    <td>${peixe.idPeixe}</td>
+                    <td>${peixe.especie}</td>
+                    <td>${peixe.nome_cientifico}</td>
+                    <td>${peixe.getValor_Unid()}</td>
                     <td>
                         <form name="cadastroForm" action="${pageContext.request.contextPath}${URL_BASE}/PeixeControlador" method="get">
-                            <input type="hidden" name="codigoPeixe" value="${cidade.codigoPeixe}" >
-                            <input type="hidden" name="nomePeixe" value="${cidade.nomePeixe}" >
-                            <input type="hidden" name="ufPeixe" value="${cidade.ufPeixe}" >
+                            <input type="hidden" name="idPeixe" value="${peixe.idPeixe}" >
+                            <input type="hidden" name="especie" value="${peixe.especie}" >
+                            <input type="hidden" name="nome_cientifico" value="${peixe.nome_cientifico}" >
+                            <input type="hidden" name="valor_unidade" value="${peixe.getValor_Unid()}" >
                             <input type="hidden" name="opcao" value="editar" >
                             <button type="submit">Editar</button>
                         </form>    
                     </td>
                     <td>
                         <form name="cadastroForm" action="${pageContext.request.contextPath}${URL_BASE}/PeixeControlador" method="get">
-                            <input type="hidden" name="codigoPeixe" value="${cidade.codigoPeixe}" >
-                            <input type="hidden" name="nomePeixe" value="${cidade.nomePeixe}" >
-                            <input type="hidden" name="ufPeixe" value="${cidade.ufPeixe}" >
+                            <input type="hidden" name="idPeixe" value="${peixe.idPeixe}" >
+                            <input type="hidden" name="especie" value="${peixe.especie}" >
+                            <input type="hidden" name="nome_cientifico" value="${peixe.nome_cientifico}" >
+                            <input type="hidden" name="valor_unidade" value="${peixe.getValor_Unid()}" >
                             <input type="hidden" name="opcao" value="excluir" >
                             <button type="submit">Excluir</button>
                         </form>    
