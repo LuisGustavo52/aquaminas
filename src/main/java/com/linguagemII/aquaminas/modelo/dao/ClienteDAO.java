@@ -15,8 +15,8 @@ import java.util.List;
  */
     public class ClienteDAO extends GenericoDAO<Cliente>{
     public void salvar(Cliente c){
-        String insert = "INSERT INTO Cliente(idCliente,nome,cpf,telefone) VALUES (?,?,?,?)";
-        save(insert, c.getIdCliente(),c.getNome(),c.getCpf() ,c.getTelefone());
+        String insert = "INSERT INTO Cliente(nome,cpf,telefone) VALUES (?,?,?)";
+        save(insert,c.getNome(),c.getCpf() ,c.getTelefone());
     }
     
     public void alterar(Cliente c){
