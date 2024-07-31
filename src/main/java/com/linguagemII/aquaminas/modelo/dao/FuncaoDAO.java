@@ -35,7 +35,7 @@ import java.util.List;
     }
     
     public List<Funcao> buscarTodas(){
-        String select = "SELECT FROM Funcao";
+        String select = "SELECT * FROM Funcao";
         return buscarTodos(select, new FuncaoRowMapper());
     }
     public static class FuncaoRowMapper implements RowMapper<Funcao>{

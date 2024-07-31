@@ -30,16 +30,16 @@ import java.util.List;
 
 public class FuncaoControlador extends HttpServlet {
 
-    private FuncaoDAO FuncaoDao;
-    private Funcao Funcao;
+    private FuncaoDAO funcaoDao;
+    private Funcao funcaoEntidade;
     String idFuncao = "";
     String funcao = "";
     String opcao = "";
 
     @Override
     public void init() throws ServletException {
-        FuncaoDao = new FuncaoDAO();
-        Funcao = new Funcao();
+        funcaoDao = new FuncaoDAO();
+        funcaoEntidade = new Funcao();
     }
     
 
@@ -73,9 +73,8 @@ public class FuncaoControlador extends HttpServlet {
 
     private void cadastrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         validaCampos();
-        Funcao.setIdFuncao (Integer.parseInt(idFuncao));
-        Funcao.setFuncao(funcao);
-        FuncaoDao.salvar(Funcao);
+        funcaoEntidade.setFuncao(funcao);
+        funcaoDao.salvar(funcaoEntidade);
         
         encaminharParaPagina(request, response);
     }
@@ -83,29 +82,29 @@ public class FuncaoControlador extends HttpServlet {
     private void editar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("idFuncao", idFuncao);
         request.setAttribute("opcao", "confirmarEditar");
-        request.setAttribute("Funcao", Funcao);
+        request.setAttribute("Funcao", funcao);
         request.setAttribute("mensagem", "Edite os dados e clique em salvar");
         encaminharParaPagina(request, response);
     }
     private void excluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("idFuncao", idFuncao);
         request.setAttribute("opcao", "confirmarEditar");
-        request.setAttribute("Funcao", Funcao);
+        request.setAttribute("Funcao", funcao);
         request.setAttribute("mensagem", "Edite os dados e clique em salvar");
         encaminharParaPagina(request, response);
     }
 
     private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         validaCampos();
-        Funcao.setIdFuncao(Integer.valueOf(idFuncao));
-        Funcao.setFuncao(funcao);
-        FuncaoDao.alterar(Funcao);
+        funcaoEntidade.setIdFuncao(Integer.parseInt(idFuncao));
+        funcaoEntidade.setFuncao(funcao);
+        funcaoDao.alterar(funcaoEntidade);
         cancelar(request, response);
     }
     private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Funcao.setIdFuncao(Integer.valueOf(idFuncao));
-        Funcao.setFuncao(funcao);
-        FuncaoDao.excluir(Funcao);
+        funcaoEntidade.setIdFuncao(Integer.valueOf(idFuncao));
+        funcaoEntidade.setFuncao(funcao);
+        funcaoDao.excluir(funcaoEntidade);
         cancelar(request, response);
     }
 
@@ -117,7 +116,7 @@ public class FuncaoControlador extends HttpServlet {
     }
 
     private void encaminharParaPagina(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Funcao> Funcaos = FuncaoDao.buscarTodas();
+        List<Funcao> Funcaos = funcaoDao.buscarTodas();
         request.setAttribute("Funcaos", Funcaos);
         request.setAttribute(opcao, opcao);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/CadastroFuncao.jsp");
@@ -126,7 +125,7 @@ public class FuncaoControlador extends HttpServlet {
     }
     
     public void validaCampos(){
-        if(Funcao==null || funcao.isEmpty() ){
+        if(funcao==null || funcao.isEmpty() ){
             throw new IllegalArgumentException("Um ou mais parâmetros estão ausentes");
         }
     }
