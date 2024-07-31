@@ -15,8 +15,8 @@ import java.util.List;
  */
     public class FornecedorDAO extends GenericoDAO<Fornecedor>{
     public void salvar(Fornecedor f){
-        String insert = "INSERT INTO Fornecedor(idFornecedor,nome,cpf,telefone) VALUES (?,?,?,?)";
-        save(insert, f.getIdFornecedor(),f.getNome(),f.getCpf() ,f.getTelefone());
+        String insert = "INSERT INTO Fornecedor(nome,cpf,telefone) VALUES (?,?,?)";
+        save(insert, f.getNome(),f.getCpf() ,f.getTelefone());
     }
     
     public void alterar(Fornecedor f){
