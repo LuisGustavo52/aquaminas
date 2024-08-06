@@ -35,7 +35,7 @@ import java.util.List;
     }
     
     public List<Fornecedor> buscarTodas(){
-        String select = "SELECT FROM Fornecedor";
+        String select = "SELECT * FROM Fornecedor";
         return buscarTodos(select, new FornecedorRowMapper());
     }
 

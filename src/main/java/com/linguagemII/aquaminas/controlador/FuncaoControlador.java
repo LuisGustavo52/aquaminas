@@ -88,9 +88,9 @@ public class FuncaoControlador extends HttpServlet {
     }
     private void excluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("idFuncao", idFuncao);
-        request.setAttribute("opcao", "confirmarEditar");
+        request.setAttribute("opcao", "confirmarExcluir");
         request.setAttribute("Funcao", funcao);
-        request.setAttribute("mensagem", "Edite os dados e clique em salvar");
+        request.setAttribute("mensagem", "Clique em salvar para confirmar a exclusão dos dados");
         encaminharParaPagina(request, response);
     }
 
@@ -116,8 +116,8 @@ public class FuncaoControlador extends HttpServlet {
     }
 
     private void encaminharParaPagina(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Funcao> Funcaos = funcaoDao.buscarTodas();
-        request.setAttribute("Funcaos", Funcaos);
+        List<Funcao> funcaos = funcaoDao.buscarTodas();
+        request.setAttribute("funcaos", funcaos);
         request.setAttribute(opcao, opcao);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/CadastroFuncao.jsp");
         dispatcher.forward(request, response);

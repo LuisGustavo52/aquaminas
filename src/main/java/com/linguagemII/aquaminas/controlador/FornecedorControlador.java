@@ -45,7 +45,7 @@ public class FornecedorControlador extends HttpServlet {
             idFornecedor = request.getParameter("idFornecedor");
             nome = request.getParameter("nome");
             cpf = request.getParameter("cpf");
-            telefone = request.getParameter("valor_unidade");
+            telefone = request.getParameter("telefone");
             if (opcao == null || opcao.isEmpty()) {
                 opcao = "cadastrar";
             }
@@ -82,7 +82,7 @@ public class FornecedorControlador extends HttpServlet {
         request.setAttribute("opcao", "confirmarEditar");
         request.setAttribute("nome", nome);
         request.setAttribute("cpf", cpf);
-        request.setAttribute("valor_unidade", telefone);
+        request.setAttribute("telefone", telefone);
         request.setAttribute("mensagem", "Edite os dados e clique em salvar");
         encaminharParaPagina(request, response);
     }
@@ -91,7 +91,7 @@ public class FornecedorControlador extends HttpServlet {
         request.setAttribute("opcao", "confirmarExcluir");
         request.setAttribute("nome", nome);
         request.setAttribute("cpf", cpf);
-        request.setAttribute("valor_unidade", telefone);
+        request.setAttribute("telefone", telefone);
         request.setAttribute("mensagem", "Clique em salvar para confirmar a exclusão dos dados");
         encaminharParaPagina(request, response);
     }
@@ -119,12 +119,13 @@ public class FornecedorControlador extends HttpServlet {
         request.setAttribute("opcao", "cadastrar");
         request.setAttribute("nome", "");
         request.setAttribute("cpf", "");
+        request.setAttribute("telefone", "");
         encaminharParaPagina(request, response);
     }
 
     private void encaminharParaPagina(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Fornecedor> fornecedors = fornecedorDao.buscarTodas();
-        request.setAttribute("fornecedors", fornecedors);
+        List<Fornecedor> fornecedores = fornecedorDao.buscarTodas();
+        request.setAttribute("fornecedores", fornecedores);
         request.setAttribute(opcao, opcao);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/CadastroFornecedor.jsp");
         dispatcher.forward(request, response);
