@@ -4,7 +4,6 @@
  */
 package com.linguagemII.aquaminas.modelo.dao;
 
-import com.linguagemII.aquaminas.modelo.dao.ConnectionFactory;
 import com.linguagemII.aquaminas.modelo.entidade.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

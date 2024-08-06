@@ -51,14 +51,14 @@ public class AuthFIlter implements Filter {
         // Verifica se "user" está na sessão
         // System.out.println("USER: "+httpRequest.getSession().getAttribute("user"));
         if (path.startsWith("/public/") || path.equalsIgnoreCase("/login.jsp")
-                || path.equalsIgnoreCase("/com/mycompany/estudocasosi/controlador/LoginControlador")
-                || path.equalsIgnoreCase("/com/mycompany/estudocasosi/controlador/LogountControlador")
+                || path.equalsIgnoreCase("/com/linguagemII/aquaminas/controlador/LoginControlador")
+                || path.equalsIgnoreCase("/com/linguagemII/aquaminas/controlador/LogountControlador")
                 || path.equalsIgnoreCase("/index.jsp") || path.equalsIgnoreCase("/menu.jsp")|| path.equalsIgnoreCase("/CadastroUsuario.jsp")
                 || path.contains("/css/") || path.contains("/js/") || path.contains("/imagens/")) {
             chain.doFilter(request, response); // Continuar sem bloquear essas requisições
         } else {
             if (httpRequest.getSession().getAttribute("user") == null) {
-                httpResponse.sendRedirect("/estudoCasoSI/login.jsp"); // Redirecionar para a página de login
+                httpResponse.sendRedirect("/aquaminas/login.jsp"); // Redirecionar para a página de login
 
             } else {
                 chain.doFilter(request, response); // Usuário está logado, continue com a solicitação.
