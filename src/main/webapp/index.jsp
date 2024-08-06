@@ -1,23 +1,17 @@
+<%-- 
+    Document   : index
+    Created on : 5 de ago de 2024, 22:31:29
+    Author     : 13306819670
+--%>
+<%@include file="menu.jsp" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="pt">
+<html>
     <head>
-        <meta charset="UTF-8">
-        <title>Página Principal</title>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/estilo.css">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Aquaminas</title>
     </head>
     <body>
-       
-        <nav>
-            <ul>
-                <li><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
-                <li><a href="${pageContext.request.contextPath}${URL_BASE}/PeixeControlador?opcao=cancelar">Peixe</a></li>
-                <li><a href="${pageContext.request.contextPath}${URL_BASE}/FornecedorControlador?opcao=cancelar">Fornecedor</a></li>
-                <li><a href="${pageContext.request.contextPath}${URL_BASE}/ClienteControlador?opcao=cancelar">Cliente</a></li>
-                <li><a href="${pageContext.request.contextPath}${URL_BASE}/FuncaoControlador?opcao=cancelar">Função</a></li>
-                <li><a href="${pageContext.request.contextPath}/login.jsp">Login</a></li>
-                <li><a href="${pageContext.request.contextPath}${URL_BASE}/LogoutControlador">Logout</a></li>
-                
-            </ul>
-        </nav>
+        <h1>Aquaminas Sistema</h1>
     </body>
 </html>
