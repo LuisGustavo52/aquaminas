@@ -20,8 +20,8 @@ import java.util.List;
     }
     
     public void alterar(Cliente c){
-        String update = "UPDATE Cliente SET idCliente = ?,nome=? ,cpf = ?, telefone = ? WHERE CODIGO=?";
-        save(update,  c.getIdCliente(),c.getNome(),c.getCpf() ,c.getTelefone());
+        String update = "UPDATE Cliente SET nome=? ,cpf = ?, telefone = ? WHERE idcliente=?";
+        save(update, c.getNome(),c.getCpf() ,c.getTelefone(), c.getIdCliente());
     }
     
     public void excluir(Cliente c){
@@ -35,7 +35,7 @@ import java.util.List;
     }
     
     public List<Cliente> buscarTodas(){
-        String select = "SELECT FROM Cliente";
+        String select = "SELECT * FROM Cliente";
         return buscarTodos(select, new ClienteRowMapper());
     }
     

@@ -78,8 +78,9 @@ public class ClienteControlador extends HttpServlet {
 
     private void cadastrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         validaCampos();
-        cliente.setIdCliente(Integer.parseInt(idCliente));
-        cliente.setNome(idCliente);
+        cliente.setNome(nome);
+        cliente.setCpf(cpf);
+        cliente.setTelefone(telefone);
         clienteDao.salvar(cliente);
         
         
@@ -89,19 +90,19 @@ public class ClienteControlador extends HttpServlet {
     private void editar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("idCliente", idCliente);
         request.setAttribute("opcao", "confirmarEditar");
-        request.setAttribute("Cliente", nome);
-        request.setAttribute("CPF", cpf);
-        request.setAttribute("Telefone", telefone);
+        request.setAttribute("nome", nome);
+        request.setAttribute("cpf", cpf);
+        request.setAttribute("telefone", telefone);
         request.setAttribute("mensagem", "Edite os dados e clique em salvar");
         encaminharParaPagina(request, response);
     }
     private void excluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("idCliente", idCliente);
-        request.setAttribute("opcao", "confirmarEditar");
-        request.setAttribute("Cliente", nome);
-        request.setAttribute("CPF", cpf);
-        request.setAttribute("Telefone", telefone);
-        request.setAttribute("mensagem", "Edite os dados e clique em salvar");
+        request.setAttribute("opcao", "confirmarExcluir");
+        request.setAttribute("nome", nome);
+        request.setAttribute("cpf", cpf);
+        request.setAttribute("telefone", telefone);
+        request.setAttribute("mensagem", "Clique em salvar para confirmar a exclusão dos dados");
         encaminharParaPagina(request, response);
     }
 
@@ -119,7 +120,7 @@ public class ClienteControlador extends HttpServlet {
         cliente.setNome(nome);
         cliente.setCpf(cpf);
         cliente.setTelefone(telefone);
-        clienteDao.alterar(cliente);
+        clienteDao.excluir(cliente);
         cancelar(request, response);
         cancelar(request, response);
     }
@@ -127,15 +128,15 @@ public class ClienteControlador extends HttpServlet {
     private void cancelar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("IdCliente", "0");
         request.setAttribute("opcao", "cadastrar");
-        request.setAttribute("Nome", "");
-        request.setAttribute("CPF", "");
-        request.setAttribute("Telefone", "");
+        request.setAttribute("nome", "");
+        request.setAttribute("cpf", "");
+        request.setAttribute("telefone", "");
         encaminharParaPagina(request, response);
     }
 
     private void encaminharParaPagina(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Cliente> Clientes = clienteDao.buscarTodas();
-        request.setAttribute("Clientes", Clientes);
+        request.setAttribute("clientes", Clientes);
         request.setAttribute(opcao, opcao);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/CadastroCliente.jsp");
         dispatcher.forward(request, response);
@@ -143,9 +144,8 @@ public class ClienteControlador extends HttpServlet {
     }
     
     public void validaCampos(){
-        if(idCliente==null || idCliente.isEmpty() ){
+        if(nome==null || nome.isEmpty()|| cpf==null || cpf.isEmpty() || telefone==null || telefone.isEmpty()){
             throw new IllegalArgumentException("Um ou mais parâmetros estão ausentes");
         }
     }
-
 }

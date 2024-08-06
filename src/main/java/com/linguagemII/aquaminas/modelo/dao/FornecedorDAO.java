@@ -20,8 +20,8 @@ import java.util.List;
     }
     
     public void alterar(Fornecedor f){
-        String update = "UPDATE Fornecedor SET idFornecedor = ?,nome=? , cpf=?, telefone=? WHERE idFornecedor=?";
-        save(update,  f.getIdFornecedor(),f.getNome(),f.getCpf() ,f.getTelefone());
+        String update = "UPDATE Fornecedor SET nome=? , cpf=?, telefone=? WHERE idFornecedor=?";
+        save(update, f.getNome(),f.getCpf() ,f.getTelefone(), f.getIdFornecedor());
     }
     
     public void excluir(Fornecedor f){
