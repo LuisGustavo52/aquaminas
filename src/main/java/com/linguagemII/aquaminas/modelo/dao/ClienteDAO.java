@@ -5,6 +5,8 @@
 package com.linguagemII.aquaminas.modelo.dao;
 
 import com.linguagemII.aquaminas.modelo.entidade.Cliente;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -18,7 +20,6 @@ import java.util.List;
         String insert = "INSERT INTO Cliente(nome,cpf,telefone) VALUES (?,?,?)";
         save(insert,c.getNome(),c.getCpf() ,c.getTelefone());
     }
-    
     public void alterar(Cliente c){
         String update = "UPDATE Cliente SET nome=? ,cpf = ?, telefone = ? WHERE idcliente=?";
         save(update, c.getNome(),c.getCpf() ,c.getTelefone(), c.getIdCliente());
