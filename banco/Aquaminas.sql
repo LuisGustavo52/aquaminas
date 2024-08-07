@@ -228,6 +228,18 @@ CREATE TABLE IF NOT EXISTS `endereco` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `usuario`
+-- -----------------------------------------------------
+
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    password_hash VARCHAR(60) NOT NULL,
+    email VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+
 SHOW WARNINGS;
 
 SET SQL_MODE=@OLD_SQL_MODE;
@@ -235,3 +247,9 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 show tables;
+select * from cliente;
+
+SELECT * FROM fornecedor;
+desc fornecedor;
+
+desc funcao;

@@ -4,7 +4,6 @@
     Author     : 13306819670
 --%>
 <%@include file="menu.jsp" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>

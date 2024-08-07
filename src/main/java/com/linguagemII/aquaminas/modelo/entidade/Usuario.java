@@ -43,7 +43,7 @@ public class Usuario {
     password_hash VARCHAR(60) NOT NULL,
     email VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+
     
     */
     
