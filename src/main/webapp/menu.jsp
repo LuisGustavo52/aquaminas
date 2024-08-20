@@ -9,7 +9,7 @@
        
         <nav>
             <div class="image-logo">
-                <img href="${pageContext.request.contextPath}/assets/logo.png" alt="alt"/>
+                <img height="45px" src="${pageContext.request.contextPath}/assets/logo.png" alt="alt"/>
             </div>
             <ul>
                 <li><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>

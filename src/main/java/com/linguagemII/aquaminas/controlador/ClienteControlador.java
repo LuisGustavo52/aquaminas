@@ -114,6 +114,7 @@ public class ClienteControlador extends HttpServlet {
         cliente.setTelefone(telefone);
         clienteDao.alterar(cliente);
         cancelar(request, response);
+        
     }
     private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         cliente.setIdCliente(Integer.valueOf(idCliente));
