@@ -54,7 +54,7 @@ public class AuthFIlter implements Filter {
                 || path.equalsIgnoreCase("/com/linguagemII/aquaminas/controlador/LoginControlador")
                 || path.equalsIgnoreCase("/com/linguagemII/aquaminas/controlador/LogountControlador")
                 || path.equalsIgnoreCase("/index.jsp") || path.equalsIgnoreCase("/menu.jsp")|| path.equalsIgnoreCase("/CadastroUsuario.jsp")
-                || path.contains("/css/") || path.contains("/js/") || path.contains("/imagens/")) {
+                || path.contains("/css/") || path.contains("/js/") || path.contains("/assets/")) {
             chain.doFilter(request, response); // Continuar sem bloquear essas requisições
         } else {
             if (httpRequest.getSession().getAttribute("user") == null) {
