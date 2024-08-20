@@ -1,8 +1,7 @@
-
 <%@page import="java.util.List"%>
-<%@page import="com.linguagemII.aquaminas.modelo.dao.RacaoDao"%>
-<%@page import="com.mycompany.aquaminas.modelo.entidade.Racao"%>
-<%@page import="com.linguagemII.aquaminas.modelo.dao.FornecedorDao"%>
+<%@page import="com.linguagemII.aquaminas.modelo.dao.RacaoDAO"%>
+<%@page import="com.linguagemII.aquaminas.modelo.entidade.Racao"%>
+<%@page import="com.linguagemII.aquaminas.modelo.dao.FornecedorDAO"%>
 <%@page import="com.linguagemII.aquaminas.modelo.entidade.Fornecedor"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -12,40 +11,37 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Cadastro de Ração</title>
     </head>
-
-
     <body>
-        <h1>Cadastro Funcionário</h1>
+        <h1>Cadastro de Ração</h1>
         <table>
-            <form id="cadastroForm" name="cadastroForm" action="${pageContext.request.contextPath}${URL_BASE}/FuncionarioControlador" method="get">
+            <form id="cadastroRacaoForm" name="cadastroRacaoForm" action="${pageContext.request.contextPath}${URL_BASE}/RacaoControlador" method="get">
                 <input type="hidden" name="opcao" value="${opcao}" />
-                <input type="hidden" name="idFuncionario" value="${idFuncionario}" />
-                <p><label>Nome:</label> <input type="text" name="nomeFuncionario" value="${nome}" size="40" required/> </p>
-                <p><label>Salário:</label> <input type="number" name="valorFuncionario" value="${valor}" size="10" required/> </p>
-                <p><label>Nascimento:</label> <input type="date" name="telefoneFuncionario" value="${telefone}"  /> </p>
-                <p><label>Cidade:</label>
-                    <select name="funcionarioFuncionario">
-                     <c:forEach var="funcionario" items="${funcionarios}">
-                         <c:choose> 
-                            
-                            <c:when test="${funcionario.idFuncao eq funcionarioFuncionario}">
-                                <option selected value="${funcionario.idFuncao}">${funcionario.idFuncao}</option>
-                            </c:when>
-                            <c:otherwise>
-                                <option value="${funcionario.idFuncao}">${funcionario.idFuncao}</option>
-                            </c:otherwise>
-                        </c:choose>
-                    </c:forEach>
-                </select>
+                <input type="hidden" name="idRacao" value="${idRacao}" />
+                <p><label>Nome:</label> <input type="text" name="nome" value="${nome}" size="40" required/> </p>
+                <p><label>Peso:</label> <input type="number" name="peso" value="${peso}" size="10" required/> </p>
+                <p><label>Valor:</label> <input type="number" name="valor" value="${valor}" size="10" required/> </p>
+                <p><label>Fornecedor:</label>
+                    <select name="fornecedor">
+                        <c:forEach var="fornecedor" items="${fornecedores}">
+                            <c:choose>
+                                <c:when test="${fornecedor.idFornecedor eq fornecedor}">
+                                    <option selected value="${fornecedor.idFornecedor}">${fornecedor.nome}</option>
+                                </c:when>
+                                <c:otherwise>
+                                    <option value="${fornecedor.idFornecedor}">${fornecedor.nome}</option>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+                    </select>
                 </p>
                 <td> 
                     <input type="submit" value="Salvar" name="Salvar"  /> 
                 </td>
             </form>
 
-            <form  name="cadastroForm" action="${pageContext.request.contextPath}${URL_BASE}/FuncionarioControlador" method="get">
+            <form name="cadastroRacaoForm" action="${pageContext.request.contextPath}${URL_BASE}/RacaoControlador" method="get">
                 <td>
                     <input type="submit" value="Cancelar" name="Cancelar"  />
                 </td>
@@ -55,52 +51,49 @@
         ${mensagem}
 
         <table border="1">
-            <c:if test="${not empty funcionarios}">
+            <c:if test="${not empty racoes}">
                 <tr>
                     <th>Código</th>
                     <th>Nome</th>
+                    <th>Peso</th>
                     <th>Valor</th>
-                    <th>Telefone</th>
-                    <th>Cpf</th>
+                    <th>Fornecedor</th>
                     <th>Alterar</th>
                     <th>Excluir</th>
                 </tr> 
             </c:if>
 
-            <c:forEach var="funcionario" items="${funcionarios}">
+            <c:forEach var="racao" items="${racoes}">
                 <tr>
-                    <td>${funcionario.idFuncionario}</td>
-                    <td>${funcionario.nome}</td>
-                    <td>${funcionario.cpf}</td>
-                    <td>${funcionario.telefone}</td>
-                    <td>${funcionario.funcaoFuncionario.idFuncao}</td>
+                    <td>${racao.idRacao}</td>
+                    <td>${racao.nome}</td>
+                    <td>${racao.peso}</td>
+                    <td>${racao.valor}</td>
+                    <td>${racao.fornecedor.nome}</td>
                     <td>
-                        <form name="cadastroForm" action="${pageContext.request.contextPath}${URL_BASE}/FuncionarioControlador" method="get">
-                            <input type="hidden" name="idFuncionario" value="${funcionario.idFuncionario}" >
-                            <input type="hidden" name="nome" value="${funcionario.nome}" >
-                            <input type="hidden" name="cpf" value="${funcionario.cpf}" >
-                              <input type="hidden" name="telefone" value="${funcionario.telefone}">
-                              <input type="hidden" name="idFuncao" value="${funcionario.funcaoFuncionario.idFuncao}" >
+                        <form name="cadastroRacaoForm" action="${pageContext.request.contextPath}${URL_BASE}/RacaoControlador" method="get">
+                            <input type="hidden" name="idRacao" value="${racao.idRacao}" >
+                            <input type="hidden" name="nome" value="${racao.nome}" >
+                            <input type="hidden" name="peso" value="${racao.peso}" >
+                            <input type="hidden" name="valor" value="${racao.valor}" >
+                            <input type="hidden" name="fornecedor" value="${racao.fornecedor.idFornecedor}" >
                             <input type="hidden" name="opcao" value="editar" >
                             <button type="submit">Editar</button>
                         </form>    
                     </td>
                     <td>
-                        <form name="cadastroForm" action="${pageContext.request.contextPath}${URL_BASE}/FuncionarioControlador" method="get">
-                            <input type="hidden" name="idFuncionario" value="${funcionario.idFuncionario}" >
-                            <input type="hidden" name="nome" value="${funcionario.nome}" >
-                            <input type="hidden" name="cpf" value="${funcionario.cpf}" >
-                              <input type="hidden" name="telefone" value="${funcionario.telefone}">
-                            <input type="hidden" name="idFuncao" value="${funcionario.funcaoFuncionario.idFuncao}" >
+                        <form name="cadastroRacaoForm" action="${pageContext.request.contextPath}${URL_BASE}/RacaoControlador" method="get">
+                            <input type="hidden" name="idRacao" value="${racao.idRacao}" >
+                            <input type="hidden" name="nome" value="${racao.nome}" >
+                            <input type="hidden" name="peso" value="${racao.peso}" >
+                            <input type="hidden" name="valor" value="${racao.valor}" >
+                            <input type="hidden" name="fornecedor" value="${racao.fornecedor.idFornecedor}" >
                             <input type="hidden" name="opcao" value="excluir" >
                             <button type="submit">Excluir</button>
                         </form>    
                     </td>
                 </tr>
             </c:forEach>
-
-
-
         </table>
 
     </body>

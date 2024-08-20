@@ -19,8 +19,9 @@ public class FuncionarioDao extends GenericoDAO<Funcionario> {
     }
     
     public void alterar(Funcionario c){
-        String update = "UPDATE FUNCIONARIO SET NOME=?,CPF=?,TELEFONE=?,FUNCAO=? WHERE IDFUNCIONARIO=?";
-        save(update,c.getNome(),  c.getNome(), c.getCpf(), c.getTelefone(), c.getFuncao().getIdFuncao());
+        String update = "UPDATE FUNCIONARIO SET NOME=?, CPF=?, TELEFONE=?, FUNCAO=? WHERE IDFUNCIONARIO=?";
+        save(update, c.getNome(), c.getCpf(), c.getTelefone(), c.getFuncao().getIdFuncao(), c.getIdFuncionario());
+
     }
     
     public void excluir(Funcionario c){
@@ -48,7 +49,7 @@ public class FuncionarioDao extends GenericoDAO<Funcionario> {
             funcionario.setNome(rs.getString("nome"));
             funcionario.setCpf(rs.getString("cpf"));
             funcionario.setTelefone(rs.getString("Telefone"));
-            funcionario.getFuncao().setIdFuncao(rs.getInt("Funcionario_idFuncionario"));
+            funcionario.getFuncao().setIdFuncao(rs.getInt("idFuncao"));
             return funcionario;
         }
         
