@@ -10,8 +10,8 @@ package com.linguagemII.aquaminas.modelo.entidade;
  */
 public class Funcionario {
     private Integer idFuncionario;
-    private Integer nome;
-    private Integer cpf;
+    private String nome;
+    private String cpf;
     private String telefone;
     private Funcao  funcao;
 
@@ -23,19 +23,19 @@ public class Funcionario {
         this.idFuncionario = idFuncionario;
     }
 
-    public Integer getNome() {
+    public String getNome() {
         return nome;
     }
 
-    public void setNome(Integer nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public Integer getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(Integer cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
