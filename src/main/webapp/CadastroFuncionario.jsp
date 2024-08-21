@@ -1,8 +1,8 @@
 
 <%@page import="java.util.List"%>
-<%@page import="com.linguagemII.aquaminas.modelo.dao.FuncionarioDAO"%>
-<%@page import="com.mycompany.aquaminas.modelo.entidade.Funcionario"%>
-<%@page import="com.linguagemII.aquaminas.modelo.dao.FuncaoDAo"%>
+<%@page import="com.linguagemII.aquaminas.modelo.dao.FuncionarioDao"%>
+<%@page import="com.linguagemII.aquaminas.modelo.entidade.Funcionario"%>
+<%@page import="com.linguagemII.aquaminas.modelo.dao.FuncaoDAO"%>
 <%@page import="com.linguagemII.aquaminas.modelo.entidade.Funcao"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -23,18 +23,18 @@
                 <input type="hidden" name="opcao" value="${opcao}" />
                 <input type="hidden" name="idFuncionario" value="${idFuncionario}" />
                 <p><label>Nome:</label> <input type="text" name="nomeFuncionario" value="${nome}" size="40" required/> </p>
-                <p><label>valor</label> <input type="number" name="valorFuncionario" value="${valor}" size="10" required/> </p>
-                <p><label>Telefone</label> <input type="date" name="telefoneFuncionario" value="${telefone}"  /> </p>
+                <p><label>Cpf</label> <input type="number" name="cpfFuncionario" value="${cpf}" size="10" required/> </p>
+                <p><label>Telefone</label> <input type="text" name="telefoneFuncionario" value="${telefone}"  /> </p>
                 <p><label>Funcionario</label>
-                    <select name="funcionarioFuncionario">
-                     <c:forEach var="funcionario" items="${funcionarios}">
+                    <select name="funcaoFuncionario">
+                     <c:forEach var="funcao" items="${funcoes}">
                          <c:choose> 
                             
-                            <c:when test="${funcionario.idFuncao eq funcionarioFuncionario}">
-                                <option selected value="${funcionario.idFuncao}">${funcionario.idFuncao}</option>
+                            <c:when test="${funcao.idFuncao eq funcaoFuncionario}">
+                                <option selected value="${funcao.idFuncao}">${funcao.funcao}</option>
                             </c:when>
                             <c:otherwise>
-                                <option value="${funcionario.idFuncao}">${funcionario.idFuncao}</option>
+                                <option value="${funcao.idFuncao}">${funcao.funcao}</option>
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
@@ -59,7 +59,7 @@
                 <tr>
                     <th>Código</th>
                     <th>Nome</th>
-                    <th>Valor</th>
+                    <th>Cpf</th>
                     <th>Telefone</th>
                     <th>Cpf</th>
                     <th>Alterar</th>

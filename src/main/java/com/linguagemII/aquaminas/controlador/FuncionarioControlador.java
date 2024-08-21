@@ -4,7 +4,9 @@
  */
 package com.linguagemII.aquaminas.controlador;
 
+import com.linguagemII.aquaminas.modelo.dao.FuncaoDAO;
 import com.linguagemII.aquaminas.modelo.dao.FuncionarioDao;
+import com.linguagemII.aquaminas.modelo.entidade.Funcao;
 import com.linguagemII.aquaminas.modelo.entidade.Funcionario;
 import com.linguagemII.aquaminas.servico.WebConstantes;
 import jakarta.servlet.RequestDispatcher;
@@ -26,6 +28,7 @@ public class FuncionarioControlador extends HttpServlet {
 
     private FuncionarioDao funcionarioDao;
     private Funcionario funcionario;
+    private FuncaoDAO funcaoDAO;
     String idFuncionario = "";
     String nome = "";
     String telefone = "";
@@ -37,6 +40,7 @@ public class FuncionarioControlador extends HttpServlet {
     public void init() throws ServletException {
         funcionarioDao = new FuncionarioDao();
         funcionario = new Funcionario();
+        funcaoDAO = new FuncaoDAO();
     }
 
     @Override
@@ -47,7 +51,7 @@ public class FuncionarioControlador extends HttpServlet {
             nome = request.getParameter("nome");
             cpf = request.getParameter("cpf");
             telefone = request.getParameter("telefone");
-            funcao = request.getParameter("funcao");
+            funcao = request.getParameter("funcaoFuncionario");
             if (opcao == null || opcao.isEmpty()) {
                 opcao = "cadastrar";
             }
@@ -75,7 +79,9 @@ public class FuncionarioControlador extends HttpServlet {
         funcionario.setNome(nome);
         funcionario.setCpf(cpf);
         funcionario.setTelefone(telefone);
+        funcionario.getFuncao().setIdFuncao(Integer.valueOf(funcao)); 
         funcionarioDao.salvar(funcionario);
+        
         encaminharParaPagina(request, response);
     }
 
@@ -94,6 +100,7 @@ public class FuncionarioControlador extends HttpServlet {
         request.setAttribute("nome", nome);
         request.setAttribute("cpf", cpf);
         request.setAttribute("telefone", telefone);
+        request.setAttribute("telefone", telefone);
         request.setAttribute("mensagem", "Clique em salvar para confirmar a exclusão dos dados");
         encaminharParaPagina(request, response);
     }
@@ -104,7 +111,9 @@ public class FuncionarioControlador extends HttpServlet {
         funcionario.setNome(nome);
         funcionario.setCpf(cpf);
         funcionario.setTelefone(telefone);
+        funcionario.getFuncao().setIdFuncao(Integer.valueOf(funcao)); 
         funcionarioDao.alterar(funcionario);
+        
         cancelar(request, response);
     }
     private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -112,7 +121,9 @@ public class FuncionarioControlador extends HttpServlet {
         funcionario.setNome(nome);
         funcionario.setCpf(cpf);
         funcionario.setTelefone(telefone);
+        funcionario.getFuncao().setIdFuncao(Integer.valueOf(funcao)); 
         funcionarioDao.excluir(funcionario);
+        
         cancelar(request, response);
     }
 
@@ -126,8 +137,13 @@ public class FuncionarioControlador extends HttpServlet {
     }
 
     private void encaminharParaPagina(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Funcionario> funcionarioes = funcionarioDao.buscarTodas();
-        request.setAttribute("funcionarioes", funcionarioes);
+        
+        List<Funcionario> funcionarios = funcionarioDao.buscarTodas();
+        request.setAttribute("funcionarios", funcionarios);
+        
+        List<Funcao> funcoes = funcaoDAO.buscarTodas();
+        request.setAttribute("funcoes", funcoes);
+        
         request.setAttribute(opcao, opcao);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/CadastroFuncionario.jsp");
         dispatcher.forward(request, response);

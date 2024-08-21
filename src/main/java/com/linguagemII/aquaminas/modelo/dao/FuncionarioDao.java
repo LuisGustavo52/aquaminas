@@ -49,7 +49,7 @@ public class FuncionarioDao extends GenericoDAO<Funcionario> {
             funcionario.setNome(rs.getString("nome"));
             funcionario.setCpf(rs.getString("cpf"));
             funcionario.setTelefone(rs.getString("Telefone"));
-            funcionario.getFuncao().setIdFuncao(rs.getInt("idFuncao"));
+            funcionario.getFuncao().setIdFuncao(rs.getInt("Funcao_idFuncao"));
             return funcionario;
         }
         
