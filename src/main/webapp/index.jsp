@@ -1,6 +1,10 @@
 <%@page import="java.util.List"%>
 <%@page import="com.linguagemII.aquaminas.modelo.dao.RacaoDAO"%>
 <%@page import="com.linguagemII.aquaminas.modelo.entidade.Racao"%>
+<%@page import="com.linguagemII.aquaminas.modelo.dao.FuncionarioDAO"%>
+<%@page import="com.linguagemII.aquaminas.modelo.entidade.Funcionario"%>
+<%@page import="com.linguagemII.aquaminas.modelo.dao.ClienteDAO"%>
+<%@page import="com.linguagemII.aquaminas.modelo.entidade.Cliente"%>
 <%@page import="com.linguagemII.aquaminas.modelo.dao.PeixeDAO"%>
 <%@page import="com.linguagemII.aquaminas.modelo.entidade.Peixe"%>
 <%@page import="com.linguagemII.aquaminas.modelo.dao.VendaDAO"%>
@@ -104,17 +108,31 @@
             </div>
             <div class="form-group" id="produtoPeixeGroup" style="display:none;">
                 <label for="produtoPeixe">Produto - Peixe:</label>
-                <select id="produtoPeixe" name="produtoPeixe">
-                    <option value="tilapia">Tilápia</option>
-                    <option value="carpa">Carpa</option>
-                </select>
+                 <c:forEach var="cliente" items="${clientes}">
+                         <c:choose> 
+                            
+                            <c:when test="${cliente.idCliente eq cliente}">
+                                <option selected value="${cliente.codigoCliente}">${cliente.nomeCliente}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${cliente.codigoCliente}">${cliente.nomeCliente}</option>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
             </div>
             <div class="form-group" id="produtoRacaoGroup" style="display:none;">
                 <label for="produtoRacao">Produto - Ração:</label>
-                <select id="produtoRacao" name="produtoRacao">
-                    <option value="racaoTilapia">Ração para Tilápia</option>
-                    <option value="racaoCarpa">Ração para Carpa</option>
-                </select>
+                 <c:forEach var="cliente" items="${clientes}">
+                         <c:choose> 
+                            
+                            <c:when test="${cliente.idCliente eq cliente}">
+                                <option selected value="${cliente.codigoCliente}">${cliente.nomeCliente}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${cliente.codigoCliente}">${cliente.nomeCliente}</option>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
             </div>
             <div class="form-group">
                 <label for="quantidade">Quantidade (kg):</label>
@@ -131,7 +149,7 @@
             <button type="submit">Concluir Venda</button>
         </form>
         <br>
-        <!-- JSTL para verificar se a venda foi concluída -->
+        
         <c:if test="${not empty param.vendaConcluida and param.vendaConcluida eq 'true'}">
             <button onclick="gerarEtiqueta()">Gerar Etiqueta</button>
         </c:if>
