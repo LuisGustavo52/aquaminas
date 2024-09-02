@@ -13,6 +13,18 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Cadastro de Ração</title>
     </head>
+    
+     <script>
+
+        function submitForm(opcaoValue) {
+
+            document.getElementById("opcao").value = opcaoValue;
+            document.getElementById("cadastroForm").submit();
+        }
+
+
+    </script>
+    
     <body>
         <h1>Cadastro de Ração</h1>
         <table>
@@ -23,10 +35,10 @@
                 <p><label>Peso:</label> <input type="number" name="peso" value="${peso}" size="10" required/> </p>
                 <p><label>Valor:</label> <input type="number" name="valor" value="${valor}" size="10" required/> </p>
                 <p><label>Fornecedor:</label>
-                    <select name="fornecedor">
+                    <select name="fornecedorRacao">
                         <c:forEach var="fornecedor" items="${fornecedores}">
                             <c:choose>
-                                <c:when test="${fornecedor.idFornecedor eq fornecedor}">
+                                <c:when test="${fornecedor.idFornecedor eq fornecedorRacao}">
                                     <option selected value="${fornecedor.idFornecedor}">${fornecedor.nome}</option>
                                 </c:when>
                                 <c:otherwise>

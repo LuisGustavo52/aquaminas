@@ -4,7 +4,9 @@
  */
 package com.linguagemII.aquaminas.controlador;
 
+import com.linguagemII.aquaminas.modelo.dao.FornecedorDAO;
 import com.linguagemII.aquaminas.modelo.dao.RacaoDAO;
+import com.linguagemII.aquaminas.modelo.entidade.Fornecedor;
 import com.linguagemII.aquaminas.modelo.entidade.Racao;
 import com.linguagemII.aquaminas.servico.WebConstantes;
 import jakarta.servlet.RequestDispatcher;
@@ -26,17 +28,22 @@ public class RacaoControlador extends HttpServlet {
 
     private RacaoDAO racaoDao;
     private Racao racao;
+    private FornecedorDAO fornecedorDao;
+    private Fornecedor fornecedor;
+    
     String idRacao = "";
     String nome = "";
     String peso = "";
     String valor = "";
-    String fornecedor = "";
+    String fornecedorRacao = "";
     String opcao = "";
 
     @Override
     public void init() throws ServletException {
         racaoDao = new RacaoDAO();
         racao = new Racao();
+        fornecedorDao = new FornecedorDAO();
+        fornecedor = new Fornecedor();
     }
 
     @Override
@@ -47,7 +54,8 @@ public class RacaoControlador extends HttpServlet {
             nome = request.getParameter("nome");
             valor = request.getParameter("valor");
             peso = request.getParameter("peso");
-            fornecedor = request.getParameter("fornecedor");
+            fornecedorRacao = request.getParameter("fornecedor");
+            
             if (opcao == null || opcao.isEmpty()) {
                 opcao = "cadastrar";
             }
@@ -75,6 +83,7 @@ public class RacaoControlador extends HttpServlet {
         racao.setNome(nome);
         racao.setValor(Double.parseDouble(valor));
         racao.setPeso(Double.parseDouble(peso));
+        racao.getFornecedor().setIdFornecedor(Integer.parseInt(fornecedorRacao));
         racaoDao.salvar(racao);
         encaminharParaPagina(request, response);
     }
@@ -85,6 +94,7 @@ public class RacaoControlador extends HttpServlet {
         request.setAttribute("nome", nome);
         request.setAttribute("valor", valor);
         request.setAttribute("peso", peso);
+        request.setAttribute("fornecedor", fornecedor);
         request.setAttribute("mensagem", "Edite os dados e clique em salvar");
         encaminharParaPagina(request, response);
     }
@@ -94,6 +104,7 @@ public class RacaoControlador extends HttpServlet {
         request.setAttribute("nome", nome);
         request.setAttribute("valor", valor);
         request.setAttribute("peso", peso);
+        request.setAttribute("fornecedor", fornecedor);
         request.setAttribute("mensagem", "Clique em salvar para confirmar a exclusão dos dados");
         encaminharParaPagina(request, response);
     }
@@ -104,6 +115,7 @@ public class RacaoControlador extends HttpServlet {
         racao.setNome(nome);
         racao.setValor(Double.parseDouble(valor));
         racao.setPeso(Double.parseDouble(peso));
+        racao.getFornecedor().setIdFornecedor(Integer.parseInt(fornecedorRacao));
         racaoDao.alterar(racao);
         cancelar(request, response);
     }
@@ -112,6 +124,7 @@ public class RacaoControlador extends HttpServlet {
         racao.setNome(nome);
         racao.setValor(Double.parseDouble(valor));
         racao.setPeso(Double.parseDouble(peso));
+        racao.getFornecedor().setIdFornecedor(Integer.parseInt(fornecedorRacao));
         racaoDao.excluir(racao);
         cancelar(request, response);
     }
@@ -122,12 +135,21 @@ public class RacaoControlador extends HttpServlet {
         request.setAttribute("nome", "");
         request.setAttribute("valor", "");
         request.setAttribute("peso", "");
+        request.setAttribute("fornecedor", "");
         encaminharParaPagina(request, response);
     }
 
     private void encaminharParaPagina(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Racao> racaoes = racaoDao.buscarTodas();
-        request.setAttribute("racaoes", racaoes);
+        System.out.println("\n\n\n\n\n robertices12345\n\n\n\n\n");
+        List<Fornecedor> fornecedores = fornecedorDao.buscarTodas();
+        if(fornecedores.isEmpty()){
+            System.out.println("gay gay gay gay gay\n gay gay gay gay gay\n \n gay gay gay gay gay");
+        }
+        request.setAttribute("fornecedores", fornecedores);
+        
+        List<Racao> racoes = racaoDao.buscarTodas();
+        request.setAttribute("racoes", racoes);
+        
         request.setAttribute(opcao, opcao);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/CadastroRacao.jsp");
         dispatcher.forward(request, response);

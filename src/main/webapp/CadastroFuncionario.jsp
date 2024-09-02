@@ -1,6 +1,6 @@
 
 <%@page import="java.util.List"%>
-<%@page import="com.linguagemII.aquaminas.modelo.dao.FuncionarioDao"%>
+<%@page import="com.linguagemII.aquaminas.modelo.dao.FuncionarioDAO"%>
 <%@page import="com.linguagemII.aquaminas.modelo.entidade.Funcionario"%>
 <%@page import="com.linguagemII.aquaminas.modelo.dao.FuncaoDAO"%>
 <%@page import="com.linguagemII.aquaminas.modelo.entidade.Funcao"%>
@@ -14,7 +14,16 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
+     <script>
 
+        function submitForm(opcaoValue) {
+
+            document.getElementById("opcao").value = opcaoValue;
+            document.getElementById("cadastroForm").submit();
+        }
+
+
+    </script>
 
     <body>
         <h1>Cadastro Funcionário</h1>
@@ -25,7 +34,7 @@
                 <p><label>Nome:</label> <input type="text" name="nomeFuncionario" value="${nome}" size="40" required/> </p>
                 <p><label>Cpf</label> <input type="number" name="cpfFuncionario" value="${cpf}" size="10" required/> </p>
                 <p><label>Telefone</label> <input type="text" name="telefoneFuncionario" value="${telefone}"  /> </p>
-                <p><label>Funcionario</label>
+                <p><label>Função</label>
                     <select name="funcaoFuncionario">
                      <c:forEach var="funcao" items="${funcoes}">
                          <c:choose> 
@@ -73,14 +82,14 @@
                     <td>${funcionario.nome}</td>
                     <td>${funcionario.cpf}</td>
                     <td>${funcionario.telefone}</td>
-                    <td>${funcionario.funcaoFuncionario.idFuncao}</td>
+                    <td>${funcionario.funcao.idFuncao}</td>
                     <td>
                         <form name="cadastroForm" action="${pageContext.request.contextPath}${URL_BASE}/FuncionarioControlador" method="get">
                             <input type="hidden" name="idFuncionario" value="${funcionario.idFuncionario}" >
                             <input type="hidden" name="nome" value="${funcionario.nome}" >
                             <input type="hidden" name="cpf" value="${funcionario.cpf}" >
                               <input type="hidden" name="telefone" value="${funcionario.telefone}">
-                              <input type="hidden" name="idFuncao" value="${funcionario.funcaoFuncionario.idFuncao}" >
+                              <input type="hidden" name="funcaoFuncionario" value="${funcionario.funcao.idFuncao}" >
                             <input type="hidden" name="opcao" value="editar" >
                             <button type="submit">Editar</button>
                         </form>    
@@ -91,7 +100,7 @@
                             <input type="hidden" name="nome" value="${funcionario.nome}" >
                             <input type="hidden" name="cpf" value="${funcionario.cpf}" >
                               <input type="hidden" name="telefone" value="${funcionario.telefone}">
-                            <input type="hidden" name="idFuncao" value="${funcionario.funcaoFuncionario.idFuncao}" >
+                            <input type="hidden" name="funcaoFuncionario" value="${funcionario.funcao.idFuncao}" >
                             <input type="hidden" name="opcao" value="excluir" >
                             <button type="submit">Excluir</button>
                         </form>    

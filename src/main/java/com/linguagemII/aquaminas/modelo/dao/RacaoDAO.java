@@ -39,8 +39,7 @@ public class RacaoDAO extends GenericoDAO<Racao> {
     }
     
     public static class RacaoRowMapper implements RowMapper<Racao>{
-       ConverteData converte = new ConverteData();
-       
+       FornecedorDAO fornecedorDAO = new FornecedorDAO();
         @Override
         public Racao mapRow(ResultSet rs) throws SQLException {
             Racao racao = new Racao();
@@ -48,7 +47,7 @@ public class RacaoDAO extends GenericoDAO<Racao> {
             racao.setNome(rs.getString("nome"));
             racao.setValor(rs.getDouble("valor"));
             racao.setPeso(rs.getDouble("peso"));
-            racao.getFornecedor().setIdFornecedor(rs.getInt("Fornecedor_idFornecedor"));
+            racao.setFornecedor(fornecedorDAO.buscarPorId(rs.getInt("Fornecedor_idFornecedor")));
             return racao;
         }
         

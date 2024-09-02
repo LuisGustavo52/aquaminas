@@ -4,7 +4,9 @@
  */
 package com.linguagemII.aquaminas.controlador;
 
+import com.linguagemII.aquaminas.modelo.dao.ClienteDAO;
 import com.linguagemII.aquaminas.modelo.dao.EnderecoDAO;
+import com.linguagemII.aquaminas.modelo.entidade.Cliente;
 import com.linguagemII.aquaminas.modelo.entidade.Endereco;
 import com.linguagemII.aquaminas.servico.WebConstantes;
 import jakarta.servlet.RequestDispatcher;
@@ -26,11 +28,15 @@ public class EnderecoControlador extends HttpServlet {
 
     private EnderecoDAO enderecoDao;
     private Endereco endereco;
+    private ClienteDAO clienteDao;
+    private Cliente cliente;
+    
+    
     String idEndereco = "";
     String numero = "";
     String cidade = "";
     String complemento = "";
-    String cliente = "";
+    String clienteEndereco = "";
     String opcao = "";
 
     @Override
@@ -47,7 +53,7 @@ public class EnderecoControlador extends HttpServlet {
             numero = request.getParameter("numero");
             complemento = request.getParameter("complemento");
             cidade = request.getParameter("cidade");
-            cliente = request.getParameter("cliente");
+            clienteEndereco = request.getParameter("cliente");
             if (opcao == null || opcao.isEmpty()) {
                 opcao = "cadastrar";
             }

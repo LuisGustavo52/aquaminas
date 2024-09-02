@@ -89,10 +89,10 @@
                          <c:choose> 
                             
                             <c:when test="${cliente.idCliente eq cliente}">
-                                <option selected value="${cliente.codigoCliente}">${cliente.nomeCliente}</option>
+                                <option selected value="${cliente.idCliente}">${cliente.nomeCliente}</option>
                             </c:when>
                             <c:otherwise>
-                                <option value="${cliente.codigoCliente}">${cliente.nomeCliente}</option>
+                                <option value="${cliente.idCliente}">${cliente.nomeCliente}</option>
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
@@ -108,31 +108,35 @@
             </div>
             <div class="form-group" id="produtoPeixeGroup" style="display:none;">
                 <label for="produtoPeixe">Produto - Peixe:</label>
-                 <c:forEach var="cliente" items="${clientes}">
+                 <select name="peixeVenda">
+                 <c:forEach var="peixe" items="${peixes}">
                          <c:choose> 
                             
-                            <c:when test="${cliente.idCliente eq cliente}">
-                                <option selected value="${cliente.codigoCliente}">${cliente.nomeCliente}</option>
+                            <c:when test="${peixe.idPeixe eq peixeVenda}">
+                                <option selected value="${peixe.idPeixe}">${peixe.especie}</option>
                             </c:when>
                             <c:otherwise>
-                                <option value="${cliente.codigoCliente}">${cliente.nomeCliente}</option>
+                                <option value="${peixe.idPeixe}">${peixe.especie}</option>
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
+                 </select>
             </div>
             <div class="form-group" id="produtoRacaoGroup" style="display:none;">
                 <label for="produtoRacao">Produto - Ração:</label>
-                 <c:forEach var="cliente" items="${clientes}">
+                <select name="racaoVenda">
+                 <c:forEach var="racao" items="${racao}">
                          <c:choose> 
                             
-                            <c:when test="${cliente.idCliente eq cliente}">
-                                <option selected value="${cliente.codigoCliente}">${cliente.nomeCliente}</option>
+                            <c:when test="${racao.idCliente eq racao}">
+                                <option selected value="${racao.idRacao}">${racao.nome}</option>
                             </c:when>
                             <c:otherwise>
-                                <option value="${cliente.codigoCliente}">${cliente.nomeCliente}</option>
+                                <option value="${racao.idRacao}">${racao.nome}</option>
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
+                </select>
             </div>
             <div class="form-group">
                 <label for="quantidade">Quantidade (kg):</label>

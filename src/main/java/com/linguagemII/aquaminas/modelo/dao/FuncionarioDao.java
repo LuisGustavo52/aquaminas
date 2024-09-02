@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class FuncionarioDao extends GenericoDAO<Funcionario> {
+public class FuncionarioDAO extends GenericoDAO<Funcionario> {
     
      
     public void salvar(Funcionario c){
@@ -41,7 +41,7 @@ public class FuncionarioDao extends GenericoDAO<Funcionario> {
     
     public static class FuncionarioRowMapper implements RowMapper<Funcionario>{
        ConverteData converte = new ConverteData();
-       
+       FuncaoDAO funcaoDAO = new FuncaoDAO();
         @Override
         public Funcionario mapRow(ResultSet rs) throws SQLException {
             Funcionario funcionario = new Funcionario();
@@ -49,7 +49,7 @@ public class FuncionarioDao extends GenericoDAO<Funcionario> {
             funcionario.setNome(rs.getString("nome"));
             funcionario.setCpf(rs.getString("cpf"));
             funcionario.setTelefone(rs.getString("Telefone"));
-            funcionario.getFuncao().setIdFuncao(rs.getInt("Funcao_idFuncao"));
+            funcionario.setFuncao(funcaoDAO.buscarPorId(rs.getInt("Funcao_idFuncao")));
             return funcionario;
         }
         

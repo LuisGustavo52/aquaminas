@@ -14,7 +14,16 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
+     <script>
 
+        function submitForm(opcaoValue) {
+
+            document.getElementById("opcao").value = opcaoValue;
+            document.getElementById("cadastroForm").submit();
+        }
+
+
+    </script>
 
     <body>
         <h1>Cadastro Funcionário</h1>
