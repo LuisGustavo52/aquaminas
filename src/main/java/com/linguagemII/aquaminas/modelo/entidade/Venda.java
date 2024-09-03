@@ -10,10 +10,19 @@ package com.linguagemII.aquaminas.modelo.entidade;
  */
 public class Venda {
     private Integer idVenda;
-    private Funcionario funcionario;
-    private Integer venda_Total;
-    private Cliente cliente;
+    private Funcionario funcionario = new Funcionario();
+    private Double venda_Total;
+    private Cliente cliente = new Cliente();
+    private ItemVenda itemVenda = new ItemVenda(); 
 
+    public ItemVenda getItemVenda() {
+        return itemVenda;
+    }
+
+    public void setItemVenda(ItemVenda itemVenda) {
+        this.itemVenda = itemVenda;
+    }
+    
     public Integer getIdVenda() {
         return idVenda;
     }
@@ -30,11 +39,11 @@ public class Venda {
         this.funcionario = funcionario;
     }
 
-    public Integer getVenda_Total() {
+    public Double getVenda_Total() {
         return venda_Total;
     }
 
-    public void setVenda_Total(Integer venda_Total) {
+    public void setVenda_Total(Double venda_Total) {
         this.venda_Total = venda_Total;
     }
 

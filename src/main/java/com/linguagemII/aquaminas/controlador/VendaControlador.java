@@ -4,10 +4,18 @@
  */
 package com.linguagemII.aquaminas.controlador;
 
+import com.linguagemII.aquaminas.modelo.dao.ClienteDAO;
 import com.linguagemII.aquaminas.modelo.dao.FornecedorDAO;
+import com.linguagemII.aquaminas.modelo.dao.FuncionarioDAO;
+import com.linguagemII.aquaminas.modelo.dao.PeixeDAO;
 import com.linguagemII.aquaminas.modelo.dao.RacaoDAO;
+import com.linguagemII.aquaminas.modelo.dao.VendaDAO;
+import com.linguagemII.aquaminas.modelo.entidade.Cliente;
 import com.linguagemII.aquaminas.modelo.entidade.Fornecedor;
+import com.linguagemII.aquaminas.modelo.entidade.Funcionario;
+import com.linguagemII.aquaminas.modelo.entidade.Peixe;
 import com.linguagemII.aquaminas.modelo.entidade.Racao;
+import com.linguagemII.aquaminas.modelo.entidade.Venda;
 import com.linguagemII.aquaminas.servico.WebConstantes;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -23,48 +31,63 @@ import java.util.List;
  * @author 17933118623
  */
 
-@WebServlet(WebConstantes.BASE_PATH + "/RacaoControlador")
+@WebServlet(WebConstantes.BASE_PATH + "/VendaControlador")
 public class VendaControlador extends HttpServlet {
 
     private RacaoDAO racaoDao;
     private Racao racao;
-    private FornecedorDAO fornecedorDao;
-    private Fornecedor fornecedor;
+    private Peixe peixe;
+    private PeixeDAO peixeDAO;
+    private Cliente cliente;
+    private ClienteDAO clienteDAO;
+    private FuncionarioDAO funcionarioDAO;
+    private Funcionario funcionario;
+    private VendaDAO vendaDAO;
+    private Venda venda;
     
-    String idRacao = "";
-    String nome = "";
-    String peso = "";
-    String valor = "";
-    String fornecedorRacao = "";
+    String quantidade = "";
+    String clienteVenda = "";
+    String racaoVenda = "";
+    String funcionarioVenda = "";
+    String peixeVenda = "";
     String opcao = "";
 
     @Override
     public void init() throws ServletException {
         racaoDao = new RacaoDAO();
         racao = new Racao();
-        fornecedorDao = new FornecedorDAO();
-        fornecedor = new Fornecedor();
+        clienteDAO = new ClienteDAO();
+        cliente = new Cliente();
+        peixeDAO = new PeixeDAO();
+        peixe = new Peixe();
+        funcionarioDAO = new FuncionarioDAO();
+        funcionario = new Funcionario();
+        vendaDAO = new VendaDAO();
+        venda = new Venda();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             opcao = request.getParameter("opcao");
-            idRacao = request.getParameter("idRacao");
-            nome = request.getParameter("nome");
-            valor = request.getParameter("valor");
-            peso = request.getParameter("peso");
-            fornecedorRacao = request.getParameter("fornecedor");
+            quantidade = request.getParameter("quantidade");
+            clienteVenda = request.getParameter("clienteVenda");
+            racaoVenda = request.getParameter("racaoVenda");
+            
+            
+            funcionarioVenda = request.getParameter("vendedor");
+            peixeVenda = request.getParameter("peixeVenda");
+            if (peixeVenda == null){
+                peixeVenda = "-1";
+            }else{
+                peixeVenda = request.getParameter("peixeVenda");
+            }
             
             if (opcao == null || opcao.isEmpty()) {
                 opcao = "cadastrar";
             }
             switch (opcao) {
                 case "cadastrar":  cadastrar(request, response); break;
-                case "editar":  editar(request, response); break;
-                case "confirmarEditar":  confirmarEditar(request, response); break;
-                case "excluir":  excluir(request, response); break;
-                case "confirmarExcluir":  confirmarExcluir(request, response); break;
                 case "cancelar":  cancelar(request, response); break;
                 default:
                     throw new IllegalArgumentException("Opção inválida"+opcao);
@@ -72,7 +95,7 @@ public class VendaControlador extends HttpServlet {
           
 
         } catch (NumberFormatException e) {
-            response.getWriter().println("Erro: um ou mais parâmetros não são numeros válidos");
+            response.getWriter().println("Erro: um ou mais parâmetros não são numeros válidos"+e.getMessage());
         } catch (IllegalArgumentException e) {
             response.getWriter().println("Erro: " + e.getMessage());
         }
@@ -80,85 +103,58 @@ public class VendaControlador extends HttpServlet {
 
     private void cadastrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         validaCampos();
-        racao.setNome(nome);
-        racao.setValor(Double.parseDouble(valor));
-        racao.setPeso(Double.parseDouble(peso));
-        racao.getFornecedor().setIdFornecedor(Integer.parseInt(fornecedorRacao));
-        racaoDao.salvar(racao);
+        venda.getCliente().setIdCliente(Integer.valueOf(clienteVenda));
+        venda.getFuncionario().setIdFuncionario(Integer.parseInt(funcionarioVenda));
+        System.out.println("\n\n\nPeixeVendaControlador="+peixeVenda+"\n\n\n\n");
+        if (peixeVenda.equals("-1")) {
+            Racao racaoCadastro = racaoDao.buscarPorId(Integer.valueOf(racaoVenda));
+            venda.setVenda_Total(racaoCadastro.getValor() * Integer.valueOf(quantidade));
+        }else{
+            Peixe peixeCadastro = peixeDAO.buscarPorId(Integer.valueOf(peixeVenda));
+            venda.setVenda_Total(peixeCadastro.getValor_Unid()*Integer.valueOf(quantidade));
+        }
+        vendaDAO.salvar(venda, Integer.valueOf(racaoVenda), Integer.valueOf(peixeVenda), Integer.valueOf(quantidade));
         encaminharParaPagina(request, response);
-    }
-
-    private void editar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("idRacao", idRacao);
-        request.setAttribute("opcao", "confirmarEditar");
-        request.setAttribute("nome", nome);
-        request.setAttribute("valor", valor);
-        request.setAttribute("peso", peso);
-        request.setAttribute("fornecedor", fornecedor);
-        request.setAttribute("mensagem", "Edite os dados e clique em salvar");
-        encaminharParaPagina(request, response);
-    }
-    private void excluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("idRacao", idRacao);
-        request.setAttribute("opcao", "confirmarExcluir");
-        request.setAttribute("nome", nome);
-        request.setAttribute("valor", valor);
-        request.setAttribute("peso", peso);
-        request.setAttribute("fornecedor", fornecedor);
-        request.setAttribute("mensagem", "Clique em salvar para confirmar a exclusão dos dados");
-        encaminharParaPagina(request, response);
-    }
-
-    private void confirmarEditar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        validaCampos();
-        racao.setIdRacao(Integer.parseInt(idRacao));
-        racao.setNome(nome);
-        racao.setValor(Double.parseDouble(valor));
-        racao.setPeso(Double.parseDouble(peso));
-        racao.getFornecedor().setIdFornecedor(Integer.parseInt(fornecedorRacao));
-        racaoDao.alterar(racao);
-        cancelar(request, response);
-    }
-    private void confirmarExcluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        racao.setIdRacao(Integer.parseInt(idRacao));
-        racao.setNome(nome);
-        racao.setValor(Double.parseDouble(valor));
-        racao.setPeso(Double.parseDouble(peso));
-        racao.getFornecedor().setIdFornecedor(Integer.parseInt(fornecedorRacao));
-        racaoDao.excluir(racao);
-        cancelar(request, response);
     }
 
     private void cancelar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("idRacao", "0");
         request.setAttribute("opcao", "cadastrar");
-        request.setAttribute("nome", "");
-        request.setAttribute("valor", "");
-        request.setAttribute("peso", "");
-        request.setAttribute("fornecedor", "");
+        request.setAttribute("peixeVenda", "");
+        request.setAttribute("racaoVenda", "");
+        request.setAttribute("vendedor", "");
+        request.setAttribute("cliente", "");
+        request.setAttribute("quantidade", "");
         encaminharParaPagina(request, response);
     }
 
     private void encaminharParaPagina(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("\n\n\n\n\n robertices12345\n\n\n\n\n");
-        List<Fornecedor> fornecedores = fornecedorDao.buscarTodas();
-        if(fornecedores.isEmpty()){
-            System.out.println("gay gay gay gay gay\n gay gay gay gay gay\n \n gay gay gay gay gay");
-        }
-        request.setAttribute("fornecedores", fornecedores);
+        
+        List<Funcionario> funcionarios = funcionarioDAO.buscarTodas();
+        request.setAttribute("vendedores", funcionarios);
+        
+        List<Cliente> clientes = clienteDAO.buscarTodas();
+        request.setAttribute("clientes", clientes);
         
         List<Racao> racoes = racaoDao.buscarTodas();
         request.setAttribute("racoes", racoes);
         
+        List<Peixe> peixes = peixeDAO.buscarTodas();
+        request.setAttribute("peixes", peixes);
+        
+        List<Venda> vendas = null;
+        //venda = vendaDao.buscarTodas();
+        request.setAttribute("vendas", vendas);
+        
         request.setAttribute(opcao, opcao);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/CadastroRacao.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/Venda.jsp");
         dispatcher.forward(request, response);
 
     }
     
     public void validaCampos(){
-        if(nome==null || nome.isEmpty()|| valor==null || valor.isEmpty() || peso==null || peso.isEmpty()){
-            throw new IllegalArgumentException("Um ou mais parâmetros estão ausentes");
+        if(clienteVenda==null || clienteVenda.isEmpty()|| funcionarioVenda==null || funcionarioVenda.isEmpty() || quantidade==null || quantidade.isEmpty()){
+            throw new IllegalArgumentException("Um ou mais parâmetros estão ausentes valida campos");
         }
     }
 

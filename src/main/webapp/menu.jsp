@@ -13,6 +13,7 @@
             </div>
             <ul>
                 <li><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
+                <li><a href="${pageContext.request.contextPath}${URL_BASE}/VendaControlador?opcao=cancelar"">Vendas</a></li>
                 <li><a href="${pageContext.request.contextPath}${URL_BASE}/PeixeControlador?opcao=cancelar">Peixe</a></li>
                 <li><a href="${pageContext.request.contextPath}${URL_BASE}/FornecedorControlador?opcao=cancelar">Fornecedor</a></li>
                 <li><a href="${pageContext.request.contextPath}${URL_BASE}/ClienteControlador?opcao=cancelar">Cliente</a></li>

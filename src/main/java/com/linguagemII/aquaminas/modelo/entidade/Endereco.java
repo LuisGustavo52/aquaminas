@@ -14,7 +14,7 @@ public class Endereco {
     private String cidade;
     private String complemento;
     private String endereco;
-    private Cliente cliente;
+    private Cliente cliente = new Cliente();
 
     public Integer getIdEndereco() {
         return idEndereco;

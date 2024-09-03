@@ -6,17 +6,17 @@ package com.linguagemII.aquaminas.modelo.entidade;
 
 /**
  *
- * @author 17933118623
+ * @author Windows10
  */
-public class Venda_Peixe extends ItemVenda{
-    private Peixe peixe = new Peixe();
-    
-    public Peixe getPeixe() {
-        return peixe;
+public class ItemVenda {
+    private Integer quantidade;
+
+    public Integer getQuantidade() {
+        return quantidade;
     }
 
-    public void setPeixe(Peixe peixe) {
-        this.peixe = peixe;
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
     }
     
 }

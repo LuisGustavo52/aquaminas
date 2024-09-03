@@ -13,7 +13,7 @@ public class Funcionario {
     private String nome;
     private String cpf;
     private String telefone;
-    private Funcao  funcao;
+    private Funcao  funcao = new Funcao();
 
     public Integer getIdFuncionario() {
         return idFuncionario;

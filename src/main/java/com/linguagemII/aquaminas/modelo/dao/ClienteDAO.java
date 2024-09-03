@@ -27,7 +27,7 @@ import java.util.List;
     
     public void excluir(Cliente c){
         String delete = "DELETE FROM Cliente WHERE idCliente = ?";
-        save(delete, c.getIdCliente());
+        save(delete,  c.getIdCliente());
     }
     
     public Cliente buscarPorId(int id){

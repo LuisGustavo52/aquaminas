@@ -12,8 +12,9 @@ public class Racao {
     private Integer idRacao;
     private Double peso;
     private Double valor;
-    private Fornecedor fornecedor;
+    private Fornecedor fornecedor = new Fornecedor();
     private String nome;
+    
 
     public Integer getIdRacao() {
         return idRacao;
