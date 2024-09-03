@@ -253,3 +253,58 @@ SELECT * FROM fornecedor;
 desc fornecedor;
 
 desc funcao;
+
+-- inserções
+-- Inserções para a tabela Funcao
+INSERT INTO `Funcao` (`funcao`) VALUES ('Gerente');
+INSERT INTO `Funcao` (`funcao`) VALUES ('Vendedor');
+INSERT INTO `Funcao` (`funcao`) VALUES ('Estoquista');
+INSERT INTO `Funcao` (`funcao`) VALUES ('Auxiliar de Limpeza');
+INSERT INTO `Funcao` (`funcao`) VALUES ('Segurança');
+
+-- Inserções para a tabela Funcionario
+INSERT INTO `Funcionario` (`nome`, `cpf`, `telefone`, `Funcao_idFuncao`) VALUES ('João Silva', '12345678901', '31987654321', 1);
+INSERT INTO `Funcionario` (`nome`, `cpf`, `telefone`, `Funcao_idFuncao`) VALUES ('Maria Souza', '23456789012', '31976543210', 2);
+INSERT INTO `Funcionario` (`nome`, `cpf`, `telefone`, `Funcao_idFuncao`) VALUES ('Carlos Pereira', '34567890123', '31965432109', 3);
+INSERT INTO `Funcionario` (`nome`, `cpf`, `telefone`, `Funcao_idFuncao`) VALUES ('Ana Costa', '45678901234', '31954321098', 4);
+INSERT INTO `Funcionario` (`nome`, `cpf`, `telefone`, `Funcao_idFuncao`) VALUES ('Lucas Almeida', '56789012345', '31943210987', 5);
+
+-- Inserções para a tabela Fornecedor
+INSERT INTO `Fornecedor` (`nome`, `cpf`, `telefone`) VALUES ('Fornecedor A', '78901234567', '31932109876');
+INSERT INTO `Fornecedor` (`nome`, `cpf`, `telefone`) VALUES ('Fornecedor B', '89012345678', '31921098765');
+INSERT INTO `Fornecedor` (`nome`, `cpf`, `telefone`) VALUES ('Fornecedor C', '90123456789', '31910987654');
+INSERT INTO `Fornecedor` (`nome`, `cpf`, `telefone`) VALUES ('Fornecedor D', '01234567890', '31909876543');
+INSERT INTO `Fornecedor` (`nome`, `cpf`, `telefone`) VALUES ('Fornecedor E', '12345098765', '31987654321');
+
+-- Inserções para a tabela Peixe
+INSERT INTO `Peixe` (`valor_Unid`, `especie`, `nome_cientifico`) VALUES (25.50, 'Tilápia', 'Oreochromis niloticus');
+INSERT INTO `Peixe` (`valor_Unid`, `especie`, `nome_cientifico`) VALUES (30.00, 'Pacu', 'Piaractus mesopotamicus');
+INSERT INTO `Peixe` (`valor_Unid`, `especie`, `nome_cientifico`) VALUES (40.75, 'Tambaqui', 'Colossoma macropomum');
+INSERT INTO `Peixe` (`valor_Unid`, `especie`, `nome_cientifico`) VALUES (20.00, 'Pintado', 'Pseudoplatystoma corruscans');
+INSERT INTO `Peixe` (`valor_Unid`, `especie`, `nome_cientifico`) VALUES (15.00, 'Carpa', 'Cyprinus carpio');
+
+-- Inserções para a tabela cliente
+INSERT INTO `cliente` (`nome`, `telefone`, `cpf`) VALUES ('Cliente 1', '31987654321', '65432109876');
+INSERT INTO `cliente` (`nome`, `telefone`, `cpf`) VALUES ('Cliente 2', '31976543210', '76543210987');
+INSERT INTO `cliente` (`nome`, `telefone`, `cpf`) VALUES ('Cliente 3', '31965432109', '87654321098');
+INSERT INTO `cliente` (`nome`, `telefone`, `cpf`) VALUES ('Cliente 4', '31954321098', '98765432109');
+INSERT INTO `cliente` (`nome`, `telefone`, `cpf`) VALUES ('Cliente 5', '31943210987', '09876543210');
+
+
+INSERT INTO `Venda` (`Funcionario_idFuncionario`, `venda_Total`, `cliente_idcliente`) VALUES (1, 100.00, 1);
+INSERT INTO `Venda` (`Funcionario_idFuncionario`, `venda_Total`, `cliente_idcliente`) VALUES (2, 200.00, 2);
+INSERT INTO `Venda` (`Funcionario_idFuncionario`, `venda_Total`, `cliente_idcliente`) VALUES (3, 150.00, 3);
+INSERT INTO `Venda` (`Funcionario_idFuncionario`, `venda_Total`, `cliente_idcliente`) VALUES (4, 250.00, 4);
+INSERT INTO `Venda` (`Funcionario_idFuncionario`, `venda_Total`, `cliente_idcliente`) VALUES (5, 300.00, 5);
+
+INSERT INTO `Venda_Peixe` (`Venda_idVenda`, `Peixe_idPeixe`, `quantidade_Peixe`) VALUES (1, 1, 10);
+INSERT INTO `Venda_Peixe` (`Venda_idVenda`, `Peixe_idPeixe`, `quantidade_Peixe`) VALUES (2, 2, 5);
+INSERT INTO `Venda_Peixe` (`Venda_idVenda`, `Peixe_idPeixe`, `quantidade_Peixe`) VALUES (3, 3, 7);
+INSERT INTO `Venda_Peixe` (`Venda_idVenda`, `Peixe_idPeixe`, `quantidade_Peixe`) VALUES (4, 4, 12);
+INSERT INTO `Venda_Peixe` (`Venda_idVenda`, `Peixe_idPeixe`, `quantidade_Peixe`) VALUES (5, 5, 8);
+
+INSERT INTO `Venda_racao` (`Venda_idVenda`, `racao_idracao`, `quantidade`) VALUES (1, 1, 2);
+INSERT INTO `Venda_racao` (`Venda_idVenda`, `racao_idracao`, `quantidade`) VALUES (2, 2, 1);
+INSERT INTO `Venda_racao` (`Venda_idVenda`, `racao_idracao`, `quantidade`) VALUES (3, 3, 3);
+INSERT INTO `Venda_racao` (`Venda_idVenda`, `racao_idracao`, `quantidade`) VALUES (4, 4, 4);
+INSERT INTO `Venda_racao` (`Venda_idVenda`, `racao_idracao`, `quantidade`) VALUES (5, 5, 5);
